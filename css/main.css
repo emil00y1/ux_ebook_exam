@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+:root {
+  --secondary-color: #1C1C1C;
+  --accent-color: #0062C4;
+  --second-accent-color: #1C98EB;
+  --main-color:#F1F1F1;
+}
+
+
 /* HEADER */
 
 body {
