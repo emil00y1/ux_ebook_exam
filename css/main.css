@@ -6,6 +6,11 @@
 
 /* HEADER */
 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 body > header {
   display: flex;
   justify-content: space-between;
@@ -40,5 +45,30 @@ body > header {
     border: none;
     padding: 0.4rem 1.2rem;
     text-decoration: none;
+  }
+}
+
+/* Footer */
+
+body > footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  background-color: rgb(23, 23, 23);
+  padding: 1rem;
+  img {
+    max-width: 50px;
+  }
+  p {
+    color: aliceblue;
+  }
+  .some_icons {
+    display: flex;
+    gap: 1rem;
+    img {
+      max-width: 35px;
+      aspect-ratio: 1;
+    }
   }
 }
