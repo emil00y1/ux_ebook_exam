@@ -23,7 +23,7 @@ body > header {
   display: flex;
   justify-content: space-between;
   padding: 1rem;
-  background-color: rgb(159, 159, 240);
+  background-color: var(--secondary-color);
   img {
     max-width: 35px;
   }
@@ -31,25 +31,27 @@ body > header {
     display: flex;
     align-items: center;
     gap: 0.2rem;
-
+  input#search_field {
+    color: var(--main-color);
+  }
     img {
       width: 18px;
     }
     input {
       border: none;
       background-color: transparent;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid var(--main-color);
     }
     input:focus {
       border: none;
       outline: none;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid var(--main-color);
     }
   }
 
   #login_btn,
   #signup_btn {
-    background-color: blue;
+    background-color: var(--accent-color);
     border: none;
     padding: 0.4rem 1.2rem;
     text-decoration: none;
@@ -63,13 +65,13 @@ body > footer {
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
-  background-color: rgb(23, 23, 23);
+  background-color: var(--secondary-color);
   padding: 1rem;
   img {
     max-width: 50px;
   }
   p {
-    color: aliceblue;
+    color: var(--main-color);
   }
   .some_icons {
     display: flex;
