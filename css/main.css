@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* HEADER */
+
+body > header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: rgb(159, 159, 240);
+  img {
+    max-width: 35px;
+  }
+}
