@@ -1,67 +1,67 @@
-document
-  .getElementById("loginForm")
-  .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent default form submission
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("loginForm");
+  form.addEventListener("submit", handleLoginSubmit);
+});
 
-    // Reset previous error messages
-    document.querySelectorAll(".error").forEach((el) => (el.textContent = ""));
+function handleLoginSubmit(event) {
+  event.preventDefault(); // Prevent default form submission
 
-    // Validation flags
-    let isValid = true;
+  // Reset previous error messages
+  document.querySelectorAll(".error").forEach((el) => (el.textContent = ""));
 
-    // Email Validation
-    const email = document.getElementById("email");
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email.value)) {
-      document.getElementById("email-error").textContent =
-        "Please enter a valid email address";
-      isValid = false;
-    }
+  // Validation flags
+  let isValid = true;
 
-    // Password Validation
-    const password = document.getElementById("password");
-    if (password.value.trim().length < 8) {
-      document.getElementById("password-error").textContent =
-        "Password must be at least 8 characters long";
-      isValid = false;
-    }
+  // Email Validation
+  const email = document.getElementById("email");
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email.value)) {
+    document.getElementById("email-error").textContent =
+      "Please enter a valid email address";
+    isValid = false;
+  }
 
-    // If validation passes, send data to the server
-    if (isValid) {
-      const formData = {
-        email: email.value,
-        password: password.value,
-      };
+  // Password Validation
+  const password = document.getElementById("password");
+  if (password.value.trim().length < 8) {
+    document.getElementById("password-error").textContent =
+      "Password must be at least 8 characters long";
+    isValid = false;
+  }
 
-      // Use fetch to submit the form data to the API
-      fetch("/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+  // If validation passes, handle the login logic
+  if (isValid) {
+    const formData = new FormData(document.getElementById("loginForm"));
+
+    // Perform the login using fetch (AJAX request)
+    fetch("http://localhost:8080/users/login", {
+      method: "POST",
+      body: formData, // Send as URL-encoded string
+    })
+      .then((response) => {
+        // Check if response is OK
+        if (!response.ok) {
+          return response.text().then((text) => {
+            throw new Error(text || "Login failed");
+          });
+        }
+        return response.json(); // Parse JSON response
       })
-        .then((response) => {
-          if (!response.ok) {
-            return response.json().then((err) => {
-              throw err;
-            });
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // If login is successful, store email in sessionStorage and redirect
-          sessionStorage.setItem("userEmail", data.email); // Or use the actual returned email
-          window.location.href = "/index.html";
-        })
-        .catch((error) => {
-          // Handle API errors, like incorrect credentials
-          console.error("Login error:", error);
-          if (error.error === "Invalid credentials") {
-            alert("Incorrect email or password. Please try again.");
-          } else {
-            alert("An error occurred. Please try again.");
-          }
-        });
-    }
-  });
+      .then((data) => {
+        if (data.user_id) {
+          // If user_id exists, login is successful
+          sessionStorage.setItem(
+            "userEmail",
+            document.getElementById("email").value
+          ); // Store email in sessionStorage
+          alert("Login successful!");
+          window.location.href = "/index.html"; // Redirect to homepage
+        }
+      })
+      .catch((error) => {
+        // Display error message
+        document.getElementById("login-error").textContent =
+          "Wrong credentials. Please try again"; // Show error message
+      });
+  }
+}

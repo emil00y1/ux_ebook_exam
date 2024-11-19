@@ -9,12 +9,7 @@
   </head>
   <body>
     <main>
-      <form
-        id="signupForm"
-        action="http://localhost:8080/users"
-        method="post"
-        novalidate
-      >
+      <form id="signupForm" method="post" novalidate>
         <div class="names-container">
           <div>
             <label for="first_name">First Name:</label>
@@ -95,7 +90,7 @@
           <input type="date" id="birth_date" name="birth_date" required />
           <span class="error" id="birth_date-error"></span>
         </div>
-
+        <span class="error" id="login-error"></span>
         <div>
           <button type="submit">Sign Up</button>
         </div>

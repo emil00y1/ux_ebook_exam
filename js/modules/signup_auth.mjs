@@ -65,18 +65,34 @@ function handleFormSubmit(event) {
 
   // Phone Number Validation
   const phoneNumber = document.getElementById("phone_number");
-  const phoneRegex = /^\d{10}$/;
+  const phoneRegex = /^\d{8}$/;
   if (!phoneRegex.test(phoneNumber.value)) {
     document.getElementById("phone_number-error").textContent =
-      "Phone number must be 10 digits";
+      "Phone number must be 8 digits";
     isValid = false;
   }
-  // If all validations pass, allow the form to submit
   if (isValid) {
-    // Remove the event listener to prevent re-submission handling
-    const form = event.target;
-    form.removeEventListener("submit", handleFormSubmit);
-    // Submit the form
-    form.submit();
+    const formData = new FormData(document.getElementById("signupForm"));
+
+    fetch("http://localhost:8080/users", {
+      method: "POST",
+      body: formData, // Send as URL-encoded string
+    })
+      .then((response) => {
+        // Check if response is OK
+        if (!response.ok) {
+          return response.text().then((text) => {
+            throw new Error(text || "Signup failed");
+          });
+        }
+        return response.json(); // Parse JSON response
+      })
+      .catch((error) => {
+        // Display error message
+        console.log(error);
+        console.log(error.error);
+        document.getElementById("login-error").textContent =
+          "This email is already in use. Try another."; // Show error message
+      });
   }
 }
