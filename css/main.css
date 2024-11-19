@@ -39,7 +39,7 @@ body > header {
     color: var(--main-color);
   }
     img {
-      width: 18px;
+      width: 14px;
     }
     input {
       border: none;
@@ -61,6 +61,7 @@ body > header {
     text-decoration: none;
     border-radius: 10rem;
     color: var(--main-color);
+    margin-top: 0.8rem;
   }
 }
 
@@ -94,7 +95,7 @@ body > footer {
 .hero {
   position: relative;
   height: 80vh; 
-  background-image: url(/img/stock-photo.webp);
+  background-image: url(/img/stock-photo.png);
   background-size: cover;
   background-position: center;
   display: flex;
