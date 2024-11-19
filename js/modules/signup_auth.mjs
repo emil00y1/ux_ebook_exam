@@ -87,6 +87,16 @@ function handleFormSubmit(event) {
         }
         return response.json(); // Parse JSON response
       })
+      .then(() => {
+        // If signup is successful, replace the form with success message
+        document.getElementById("signupForm").innerHTML =
+          "<p>Successful! Your account has been created. You'll be redirected shortly.</p>";
+
+        // Redirect after 5 seconds
+        setTimeout(() => {
+          window.location.href = "/login.html";
+        }, 3000);
+      })
       .catch((error) => {
         // Display error message
         console.log(error);

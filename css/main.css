@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 * {
   margin: 0;
@@ -8,13 +8,11 @@
 }
 
 :root {
-  --secondary-color: #1C1C1C;
-  --accent-color: #0062C4;
-  --second-accent-color: #1C98EB;
-  --main-color:#F1F1F1;
+  --secondary-color: #1c1c1c;
+  --accent-color: #0062c4;
+  --second-accent-color: #1c98eb;
+  --main-color: #f1f1f1;
 }
-
-
 
 /* HEADER */
 
@@ -35,9 +33,9 @@ body > header {
     display: flex;
     align-items: center;
     gap: 0.2rem;
-  input#search_field {
-    color: var(--main-color);
-  }
+    input#search_field {
+      color: var(--main-color);
+    }
     img {
       width: 14px;
     }
@@ -51,12 +49,11 @@ body > header {
       outline: none;
       border-bottom: 1px solid var(--main-color);
     }
-    
   }
-  
-.header-buttons {
-      margin-top: 0.8rem;
-    }
+
+  .header-buttons {
+    margin-top: 0.8rem;
+  }
   #login_btn,
   #signup_btn {
     background-color: var(--accent-color);
@@ -66,6 +63,9 @@ body > header {
     border-radius: 10rem;
     color: var(--main-color);
     margin-top: 0.8rem;
+  }
+  .hidden {
+    display: none;
   }
 }
 
@@ -98,17 +98,16 @@ body > footer {
 
 .hero {
   position: relative;
-  height: 80vh; 
+  height: 80vh;
   background-image: url(/img/stock-photo.png);
   background-size: cover;
   background-position: center;
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   align-items: center;
   padding: 20px;
   color: white;
 }
-
 
 .hero-content {
   max-width: 400px;
@@ -126,7 +125,6 @@ body > footer {
   line-height: 1.5;
 }
 
-
 .hero-buttons {
   display: flex;
   gap: 15px;
@@ -139,6 +137,7 @@ body > footer {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  text-decoration: none;
 }
 
 .btn.primary {

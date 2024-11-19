@@ -54,7 +54,6 @@ function handleLoginSubmit(event) {
             "userEmail",
             document.getElementById("email").value
           ); // Store email in sessionStorage
-          alert("Login successful!");
           window.location.href = "/index.html"; // Redirect to homepage
         }
       })
