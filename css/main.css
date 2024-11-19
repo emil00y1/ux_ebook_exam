@@ -29,7 +29,7 @@ body > header {
   padding: 1rem;
   background-color: var(--secondary-color);
   img {
-    max-width: 35px;
+    max-width: 45px;
   }
   .search_field {
     display: flex;
@@ -87,4 +87,66 @@ body > footer {
       aspect-ratio: 1;
     }
   }
+}
+
+/* Hero section */
+
+.hero {
+  position: relative;
+  height: 100vh; 
+  background-image: url(/img/stock-photo.webp);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  padding: 20px;
+  color: white;
+}
+
+
+.hero-content {
+  max-width: 400px;
+  margin-right: 10%;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn.primary {
+  background-color: #0062C4;
+  color: white;
+}
+
+.btn.secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn:hover {
+  opacity: 0.8;
 }
