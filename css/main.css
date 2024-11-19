@@ -51,8 +51,12 @@ body > header {
       outline: none;
       border-bottom: 1px solid var(--main-color);
     }
+    
   }
-
+  
+.header-buttons {
+      margin-top: 0.8rem;
+    }
   #login_btn,
   #signup_btn {
     background-color: var(--accent-color);
