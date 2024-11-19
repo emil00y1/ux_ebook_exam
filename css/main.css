@@ -93,7 +93,7 @@ body > footer {
 
 .hero {
   position: relative;
-  height: 100vh; 
+  height: 80vh; 
   background-image: url(/img/stock-photo.webp);
   background-size: cover;
   background-position: center;
