@@ -12,7 +12,7 @@ export function renderBookCard(book) {
     const imageContainer = document.createElement('div');
     imageContainer.className = 'card-image';
     const image = document.createElement('img');
-    image.src = book.cover || './img/stock-photo.webp'; // Fallback to default image
+    image.src = book.cover || './img/stock-photo.jpg'; // Fallback to default image
     image.alt = `${book.title} cover`;
     imageContainer.appendChild(image);
 
@@ -46,4 +46,3 @@ export function renderBookCard(book) {
 
     return card;
 }
-
