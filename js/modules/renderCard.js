@@ -36,7 +36,7 @@ export function renderBookCard(book) {
     // Footer
     const footer = document.createElement('div');
     footer.className = 'card-footer';
-    footer.textContent = 'Explore More';
+    footer.textContent = 'More info';
 
     // Combine all parts into the card
     card.appendChild(header);
