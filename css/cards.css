@@ -1,16 +1,16 @@
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Reduced card width */
-    gap: 15px; /* Slightly tighter gap between cards */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 15px; 
     justify-items: center;
 }
 
 .card {
-    width: 200px; /* Thinner card width */
+    width: 200px; 
     border-radius: 8px;
     overflow: hidden;
-    background-color: var(--secondary-color); /* Dark card background */
-    color: var(--main-color); /* White text */
+    background-color: var(--secondary-color); 
+    color: var(--main-color); 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
@@ -18,55 +18,58 @@
 }
 
 .card-header {
-    padding: 8px; /* Slightly smaller padding */
-    background-color: var(--secondary-color); /* Slightly lighter dark for header */
+    padding: 10px;
+    background-color: var(--secondary-color); 
     font-size: 12px;
     font-weight: bold;
-    text-align: left; /* Align text to the left */
+    text-align: left; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
 }
 
 .card-image {
-    background-color: var(--main-color); /* Grey background for image section */
+    background-color: var(--main-color); 
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 140px; /* Increased container height */
-    margin: 15px 0; /* Larger margin above and below the image container */
-
+    height: 140px; 
 }
 
 .card-image img {
-    max-width: 95%; /* Slightly larger width */
-    max-height: 130px; /* Larger height to make the image bigger */
-    object-fit: cover; /* Ensures proportional scaling */
-    margin-top: 10px; /* Extra spacing above the image */
-    margin-bottom: 10px; /* Extra spacing below the image */
-
+    max-width: 95%; 
+    max-height: 130px; 
+    object-fit: cover; 
+    margin-top: 10px; 
+    margin-bottom: 10px; 
 }
 
 
 .card-content {
-    padding: 8px 12px; /* Adjusted for thinner card proportions */
-    text-align: left; /* Align text to the left */
+    padding: 8px 12px; 
+    text-align: left; 
 }
 
 .card-content h3 {
-    font-size: 14px; /* Reduced size */
+    font-size: 16px; 
     margin: 5px 0;
     font-weight: bold;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
 
 .card-content p {
-    font-size: 12px; /* Slightly smaller details */
+    font-size: 12px; 
     margin: 2px 0;
-    color: var(--main-color); /* Slightly lighter text for details */
+    color: var(--main-color); 
 }
 
 .card-footer {
     margin-top: auto;
-    padding: 8px; /* Reduced footer padding */
-    background-color: #444; /* Matches header */
-    font-size: 11px; /* Slightly smaller footer font */
-    text-align: left; /* Align text to the left */
-    color: var(--main-color); /* Subtle text color for footer */
+    padding: 8px; 
+    background-color: #444; 
+    font-size: 11px; 
+    text-align: left; 
+    color: var(--main-color);
 }

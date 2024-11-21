@@ -40,7 +40,7 @@ function handleFormSubmit(event) {
   const password = document.getElementById("password");
   const repeatPassword = document.getElementById("repeat-password");
   const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{8,}$/;
 
   if (!passwordRegex.test(password.value)) {
     document.getElementById("password-error").textContent =
