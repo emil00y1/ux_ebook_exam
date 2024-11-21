@@ -4,7 +4,7 @@ main {
   place-content: center;
 }
 
-form {
+main form {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;

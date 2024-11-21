@@ -24,3 +24,19 @@ window.addEventListener("DOMContentLoaded", () => {
 document.querySelector("#logout_btn").addEventListener("click", () => {
   sessionStorage.removeItem("userEmail");
 });
+
+// SEARCH FUNCTION
+
+const searchForm = document.getElementById("search_form");
+
+searchForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const searchQuery = document.getElementById("search_field").value.trim();
+
+  if (searchQuery) {
+    window.location.href = `/results.html?s=${encodeURIComponent(searchQuery)}`;
+  } else {
+    return;
+  }
+});
