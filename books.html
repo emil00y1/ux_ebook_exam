@@ -4,14 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Cards</title>
-  <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="/css/cards.css">
+  <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-  <div class="container">
-    <button id="reload-button">Load New Books</button>
-    <div id="cards-container" class="cards-grid"></div>
-  </div>
-  <script type="module" src="js/modules/maincards.js"></script>
+  <!-- Card grid container -->
+  <div id="cards-container" class="cards-grid"></div>
+  <button id="reload-button">Reload Books</button>
+
+  <!-- Template for a book card -->
+  <template id="book-card-template">
+    <div class="card">
+      <div class="card-header"></div>
+      <div class="card-image">
+        <img src="./img/stock-photo.jpg" alt="Book Cover">
+      </div>
+      <div class="card-content">
+        <h3></h3>
+        <p class="author"></p>
+        <p class="published-year"></p>
+      </div>
+      <div class="card-footer">More info</div>
+    </div>
+  </template>
+
+  <script type="module" src="/js/modules/maincards.js"></script>
 </body>
 </html>

@@ -1,37 +1,37 @@
-// main.js
-import { fetchBook } from './fetchBook.js';
-import { renderBookCard } from './renderCard.js';
-
-async function renderRandomBooks() {
-  const container = document.getElementById('cards-container');
-  container.innerHTML = ''; // Clear the container
-
-  const book_ids = [];
-  while (book_ids.length < 15) {
-    const random_id = Math.floor(Math.random() * (1998 - 1001 + 1)) + 1001;
-    if (!book_ids.includes(random_id)) {
-      book_ids.push(random_id);
-    }
-  }
-
-  for (const book_id of book_ids) {
+async function fetchBooks() {
     try {
-      const book = await fetchBook(book_id);
-      const bookCard = renderBookCard(book);
-      container.appendChild(bookCard);
+      const response = await fetch('http://127.0.0.1:8080/books?n=15');
+      if (!response.ok) throw new Error('Failed to fetch books');
+      return response.json();
     } catch (error) {
-      console.error(`Error fetching book with ID ${book_id}:`, error);
+      console.error('Error fetching books:', error);
+      return [];
     }
   }
-}
-
-// Initialize when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  renderRandomBooks();
-
-  // Optional: Add a button to reload random books
-  const reloadButton = document.getElementById('reload-button');
-  if (reloadButton) {
-    reloadButton.addEventListener('click', renderRandomBooks);
+  
+  function renderBookCard(book) {
+    const template = document.getElementById('book-card-template').content.cloneNode(true);
+  
+    template.querySelector('.card-header').textContent = book.publishing_company;
+    const image = template.querySelector('.card-image img');
+    image.src = book.cover || './img/stock-photo.jpg'; // Fallback image
+    image.alt = `${book.title} cover`;
+    template.querySelector('h3').textContent = book.title;
+    template.querySelector('.author').textContent = `Author: ${book.author}`;
+    template.querySelector('.published-year').textContent = `Published: ${book.publishing_year}`;
+  
+    return template;
   }
-});
+  
+  async function renderBooks() {
+    const container = document.getElementById('cards-container');
+    container.innerHTML = ''; // Clear container
+    const books = await fetchBooks();
+    books.forEach(book => container.appendChild(renderBookCard(book)));
+  }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    renderBooks();
+    document.getElementById('reload-button').addEventListener('click', renderBooks);
+  });
+  
