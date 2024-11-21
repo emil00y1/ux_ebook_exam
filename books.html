@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Cards</title>
-  <link rel="stylesheet" href="/css/cards.css">
-  <link rel="stylesheet" href="/css/main.css">
+  <title>Books</title>
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <!-- Card grid container -->
-  <div id="cards-container" class="cards-grid"></div>
-  <button id="reload-button">Reload Books</button>
+  <!-- Carousel container -->
+  <div class="carousel-wrapper">
+    <div id="cards-container" class="carousel"></div>
+  </div>
 
   <!-- Template for a book card -->
   <template id="book-card-template">
@@ -28,6 +29,6 @@
     </div>
   </template>
 
-  <script type="module" src="/js/modules/maincards.js"></script>
+  <script type="module" src="js/modules/maincards.js"></script>
 </body>
 </html>
