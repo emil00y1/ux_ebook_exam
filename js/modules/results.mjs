@@ -18,7 +18,7 @@ async function fetchResults() {
     const response = await fetch(apiEndpoint);
 
     if (!response.ok) {
-      throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      throw new Error(`API Error: Problem fetching data from the api`);
     }
 
     const data = await response.json();
@@ -45,7 +45,7 @@ async function fetchResults() {
       template.querySelector(
         ".published-year"
       ).textContent = `Published: ${result.publishing_year}`;
-
+      template.querySelector("a").href = `/book.html?id=${result.book_id}`;
       document.querySelector("#results").appendChild(template);
     });
 

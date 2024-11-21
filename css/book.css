@@ -1,0 +1,20 @@
+section#book {
+  display: flex;
+  gap: 2rem;
+}
+
+.details {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+button#loan_book {
+  margin-top: auto;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+}

@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script type="module" src="js/modules/results.mjs"></script>
+    <title></title>
     <script src="js/common.js" defer></script>
-    <link rel="stylesheet" href="css/results.css" />
+    <script type="module" src="js/modules/book.mjs"></script>
+    <link rel="stylesheet" href="css/book.css" />
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
@@ -43,8 +43,20 @@
       </div>
     </header>
     <main>
-      <h1></h1>
-      <section id="results"></section>
+      <section id="book">
+        <div class="cover">
+          <img src="" alt="" />
+        </div>
+        <div id="content">
+          <h1></h1>
+          <div class="details">
+            <p class="author"></p>
+            <p class="publisher"></p>
+            <p class="year"></p>
+          </div>
+          <button id="loan_book">Loan book</button>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -64,17 +76,4 @@
       </div>
     </footer>
   </body>
-  <template id="book-card-template">
-    <div class="card">
-      <a href="">
-        <div class="card-header"></div>
-        <div class="card-content">
-          <h3></h3>
-          <p class="author"></p>
-          <p class="published-year"></p>
-        </div>
-        <div class="card-footer">More info</div>
-      </a>
-    </div>
-  </template>
 </html>
