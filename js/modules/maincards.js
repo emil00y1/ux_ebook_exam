@@ -13,9 +13,6 @@ async function fetchBooks() {
     const template = document.getElementById('book-card-template').content.cloneNode(true);
   
     template.querySelector('.card-header').textContent = book.publishing_company;
-    const image = template.querySelector('.card-image img');
-    image.src = book.cover || './img/stock-photo.jpg';
-    image.alt = `${book.title} cover`;
     template.querySelector('h3').textContent = book.title;
     template.querySelector('.author').textContent = `Author: ${book.author}`;
     template.querySelector('.published-year').textContent = `Published: ${book.publishing_year}`;

@@ -16,7 +16,7 @@
     scroll-behavior: smooth; /* Enable smooth scrolling */
     padding: 10px;    
     background-color: var(--main-color);     
-    border-radius: 10px;
+    /* border-radius: 10px; */
   }
   
   .carousel {
