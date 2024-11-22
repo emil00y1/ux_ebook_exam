@@ -16,8 +16,17 @@
   --error: #ef4444;
 }
 
+/* General styling */
+
 body:not(#home_page) main {
   margin: 1rem;
+}
+
+a {
+  color: var(--accent-color);
+}
+a:hover {
+  color: var(--second-accent-color);
 }
 
 /* HEADER */

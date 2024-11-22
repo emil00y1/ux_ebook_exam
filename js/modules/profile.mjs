@@ -10,7 +10,7 @@ const userId = sessionStorage.getItem("userId");
 
 async function fetchUser() {
   if (!userId) {
-    window.location.href = "/login.html";
+    window.location.href = "login.html";
   }
 
   try {

@@ -55,7 +55,7 @@ function handleLoginSubmit(event) {
             "userEmail",
             document.getElementById("email").value
           );
-          window.location.href = "/index.html";
+          window.location.href = "index.html";
         }
       })
       .catch((error) => {

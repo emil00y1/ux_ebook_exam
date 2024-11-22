@@ -45,7 +45,7 @@ async function fetchResults() {
       template.querySelector(
         ".published-year"
       ).textContent = `Published: ${result.publishing_year}`;
-      template.querySelector("a").href = `/book.html?id=${result.book_id}`;
+      template.querySelector("a").href = `book.html?id=${result.book_id}`;
       document.querySelector("#results").appendChild(template);
     });
 

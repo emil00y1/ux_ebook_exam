@@ -36,7 +36,7 @@ searchForm.addEventListener("submit", async (event) => {
   const searchQuery = document.getElementById("search_field").value.trim();
 
   if (searchQuery) {
-    window.location.href = `/results.html?s=${encodeURIComponent(searchQuery)}`;
+    window.location.href = `results.html?s=${encodeURIComponent(searchQuery)}`;
   } else {
     return;
   }

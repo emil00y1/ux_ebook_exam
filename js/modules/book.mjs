@@ -46,7 +46,7 @@ async function loanBook() {
   const userId = sessionStorage.getItem("userId");
 
   if (!userId) {
-    window.location.href = "/login.html";
+    window.location.href = "login.html";
     return; // Exit the function early
   }
 

@@ -94,7 +94,7 @@ function handleFormSubmit(event) {
 
         // Redirect after 5 seconds
         setTimeout(() => {
-          window.location.href = "/login.html";
+          window.location.href = "login.html";
         }, 3000);
       })
       .catch((error) => {
