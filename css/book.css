@@ -18,3 +18,103 @@ button#loan_book {
   display: flex;
   flex-direction: column;
 }
+
+/* DIALOG - LOAN BOOK */
+
+dialog.loan_error {
+  border: none;
+  padding: 3rem 2.5rem;
+
+  width: max-content;
+
+  /* Styling */
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+  /* Center the dialog */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Content container */
+.dialog-content {
+  text-align: center;
+  margin-top: 2rem;
+  a {
+    text-decoration: none;
+    color: var(--accent-color);
+  }
+  a:hover {
+    color: var(--second-accent-color);
+  }
+}
+
+/* Close button styling */
+.close-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  color: #6b7280;
+  cursor: pointer;
+
+  /* Center the SVG */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Interactive states */
+  transition: background-color 150ms ease-in-out;
+}
+
+.close-button:hover {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.close-button:focus-visible {
+  outline: 2px solid var(--second-accent-color);
+}
+
+/* Success and error icons */
+
+.success-icon,
+.error-icon {
+  display: none;
+  margin: 0 auto;
+}
+
+.loan_error.success .success-icon {
+  display: block;
+  color: var(--approved); /* green-500 */
+  animation: scaleIn 0.3s ease-out;
+}
+
+/* Error state */
+.loan_error.error .error-icon {
+  display: block;
+  color: var(--error); /* red-500 */
+  animation: scaleIn 0.3s ease-out;
+}
+
+/* Add smooth animation */
+@keyframes dialogShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.loan-error[open] {
+  animation: dialogShow 450ms cubic-bezier(0.16, 1, 0.3, 1);
+}

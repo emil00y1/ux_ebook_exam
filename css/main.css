@@ -12,6 +12,8 @@
   --accent-color: #0062c4;
   --second-accent-color: #1c98eb;
   --main-color: #f1f1f1;
+  --approved: #22c55e;
+  --error: #ef4444;
 }
 
 body:not(#home_page) main {
