@@ -68,7 +68,10 @@ async function loanBook() {
     dialog.classList.add("success");
     document.querySelector(
       ".loan-status"
-    ).textContent = `You have successfully loaned "${bookTitle}"`;
+    ).textContent = `You have successfully loaned "${bookTitle}".`;
+    document.querySelector(
+      ".email-link"
+    ).textContent = `An access link will be sent to your email`;
 
     dialog.showModal();
   } catch (error) {
@@ -78,6 +81,7 @@ async function loanBook() {
     document.querySelector(
       ".loan-status"
     ).textContent = `You have already loaned "${bookTitle}"`;
+    document.querySelector(".email-link").remove;
 
     dialog.showModal();
 
