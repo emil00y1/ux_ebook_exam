@@ -50,12 +50,14 @@ function handleLoginSubmit(event) {
       .then((data) => {
         if (data.user_id) {
           // If user_id exists, login is successful
+          const userEmail = document.getElementById("email").value;
           sessionStorage.setItem("userId", data.user_id);
-          sessionStorage.setItem(
-            "userEmail",
-            document.getElementById("email").value
-          );
-          window.location.href = "index.html";
+          sessionStorage.setItem("userEmail", userEmail);
+          if (userEmail === "admin.library@mail.com") {
+            window.location.href = "dashboard.html";
+          } else {
+            window.location.href = "index.html";
+          }
         }
       })
       .catch((error) => {

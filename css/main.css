@@ -29,6 +29,10 @@ a:hover {
   color: var(--second-accent-color);
 }
 
+.hidden {
+  display: none;
+}
+
 /* HEADER */
 
 body#home_page > header {
@@ -84,6 +88,9 @@ body > header {
   img {
     max-width: 45px;
   }
+  > a {
+    width: min-content;
+  }
 
   #search_form:has(input:focus) {
     border: 1px solid var(--second-accent-color);
@@ -113,7 +120,8 @@ body > header {
   }
 
   .header-buttons {
-    margin-top: 0.8rem;
+    display: flex;
+    gap: 0.5rem;
   }
   #login_btn,
   #signup_btn {
@@ -123,10 +131,7 @@ body > header {
     text-decoration: none;
     border-radius: 10rem;
     color: var(--main-color);
-    margin-top: 0.8rem;
-  }
-  .hidden {
-    display: none;
+    align-self: center;
   }
 }
 
@@ -159,4 +164,8 @@ header a#logout_btn {
   text-decoration: none;
   color: var(--main-color);
   margin-right: 1rem;
+  align-self: center;
+}
+header #profile_btn {
+  align-self: center;
 }
