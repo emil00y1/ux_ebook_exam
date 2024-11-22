@@ -23,6 +23,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 document.querySelector("#logout_btn").addEventListener("click", () => {
   sessionStorage.removeItem("userEmail");
+  sessionStorage.removeItem("userId");
 });
 
 // SEARCH FUNCTION
