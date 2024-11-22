@@ -51,7 +51,7 @@ async function fetchBooks() {
   
   function renderAuthorCard(author) {
     const template = document.getElementById('author-card-template').content.cloneNode(true);
-    template.querySelector('a').href = `/author.html?id=${author.id}`;
+    template.querySelector('a').href = `/author.html?id=${author.author_id}`;
     template.querySelector('.author-name').textContent = author.author_name;
     return template;
   }
