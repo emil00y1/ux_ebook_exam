@@ -47,7 +47,7 @@ async function loadBook(event) {
     console.log(error);
     document.querySelector(
       "#content .error"
-    ).textContent = `Could not load the book. Check if the id is correct and try again later.`;
+    ).textContent = `Could not load the book. Check if the id is correct and try again.`;
   }
 }
 
