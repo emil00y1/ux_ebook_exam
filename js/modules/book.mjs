@@ -44,6 +44,12 @@ async function fetchBook() {
 
 async function loanBook() {
   const userId = sessionStorage.getItem("userId");
+
+  if (!userId) {
+    window.location.href = "/login.html";
+    return; // Exit the function early
+  }
+
   const apiEndpoint = `http://localhost:8080/users/${userId}/books/${bookId}`;
   const dialog = document.querySelector("dialog");
   const closeButton = document.querySelector("dialog button");
