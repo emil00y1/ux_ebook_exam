@@ -30,3 +30,38 @@ async function fetchBooks() {
   
   document.addEventListener('DOMContentLoaded', renderBooks);
   
+  async function fetchAuthors() {
+    try {
+      const response = await fetch('http://127.0.0.1:8080/authors');
+      if (!response.ok) throw new Error('Failed to fetch authors');
+      const data = await response.json();
+      
+      const totalAuthors = data.length; 
+
+      const startIndex = Math.floor(Math.random() * (totalAuthors - 15 + 1));
+      
+      const randomAuthors = data.slice(startIndex, startIndex + 15);
+      
+      return randomAuthors;
+    } catch (error) {
+      console.error('Error fetching authors:', error);
+      return [];
+    }
+  }
+  
+  function renderAuthorCard(author) {
+    const template = document.getElementById('author-card-template').content.cloneNode(true);
+    template.querySelector('a').href = `/author.html?id=${author.id}`;
+    template.querySelector('.author-name').textContent = author.author_name;
+    return template;
+  }
+  
+  async function renderAuthors() {
+    const container = document.getElementById('authors-container');
+    container.innerHTML = ''; // Clear container
+    const authors = await fetchAuthors();
+    authors.forEach(author => container.appendChild(renderAuthorCard(author)));
+  }
+  
+  document.addEventListener('DOMContentLoaded', renderAuthors);
+  
