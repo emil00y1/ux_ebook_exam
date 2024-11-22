@@ -1,3 +1,7 @@
+body main#discover {
+    margin: 0;
+}
+
 .popular-books {
     background-color: var(--secondary-color); 
     padding: 30px 15px;
