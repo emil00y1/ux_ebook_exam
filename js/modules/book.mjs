@@ -1,9 +1,10 @@
 window.addEventListener("load", fetchBook);
+document.querySelector("#loan_book").addEventListener("click", loanBook);
+
+const urlParams = new URLSearchParams(window.location.search);
+const bookId = urlParams.get("id");
 
 async function fetchBook() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const bookId = urlParams.get("id");
-
   if (!bookId) {
     document.querySelector("h1").textContent = "This book can not be found.";
     document.querySelector(
@@ -38,5 +39,48 @@ async function fetchBook() {
     document.querySelector(
       "#content"
     ).innerHTML = `<p>Could not load the book. Try again later.</p>`;
+  }
+}
+
+async function loanBook() {
+  const userId = sessionStorage.getItem("userId");
+  const apiEndpoint = `http://localhost:8080/users/${userId}/books/${bookId}`;
+  const dialog = document.querySelector("dialog");
+  const closeButton = document.querySelector("dialog button");
+  const bookTitle = document.querySelector("h1").textContent;
+  closeButton.addEventListener("click", () => {
+    dialog.close();
+  });
+
+  try {
+    const response = await fetch(apiEndpoint, {
+      method: "POST",
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || "Loan failed");
+    }
+
+    // Only modify DOM if the request was successful
+
+    dialog.classList.remove("error");
+    dialog.classList.add("success");
+    document.querySelector(
+      ".loan-status"
+    ).textContent = `You have successfully loaned "${bookTitle}"`;
+
+    dialog.showModal();
+  } catch (error) {
+    console.error("Error loaning book:", error);
+    dialog.classList.remove("success");
+    dialog.classList.add("error");
+    document.querySelector(
+      ".loan-status"
+    ).textContent = `You have already loaned "${bookTitle}"`;
+
+    dialog.showModal();
+
+    // Handle error appropriately - maybe show an error message to user
   }
 }
