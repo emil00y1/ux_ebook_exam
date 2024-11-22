@@ -42,9 +42,7 @@ body#home_page > header {
   left: 0;
   z-index: 5;
   background-color: transparent;
-  label > svg {
-    fill: var(--main-color);
-  }
+
   #search_form:has(input:focus) {
     border: none;
     border-bottom: 1px solid var(--main-color);
@@ -54,7 +52,9 @@ body#home_page > header {
     border-radius: 0;
     padding-inline: 0;
     border-bottom: 1px solid var(--main-color);
-
+    label > svg {
+      fill: var(--main-color);
+    }
     input {
       color: var(--main-color);
     }
@@ -160,7 +160,8 @@ body > footer {
   }
 }
 
-header a#logout_btn {
+header a#logout_btn,
+header a#dashboard_btn {
   text-decoration: none;
   color: var(--main-color);
   margin-right: 1rem;
@@ -168,4 +169,8 @@ header a#logout_btn {
 }
 header #profile_btn {
   align-self: center;
+}
+
+header a#dashboard_btn {
+  color: var(--second-accent-color);
 }

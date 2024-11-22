@@ -118,3 +118,7 @@ dialog.loan_error {
 .loan-error[open] {
   animation: dialogShow 450ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.adm_acc {
+  background-color: var(--error);
+}

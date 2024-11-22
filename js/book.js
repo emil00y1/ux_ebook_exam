@@ -1,8 +1,15 @@
 window.addEventListener("load", fetchBook);
-document.querySelector("#loan_book").addEventListener("click", loanBook);
 
 const urlParams = new URLSearchParams(window.location.search);
 const bookId = urlParams.get("id");
+const userEmail = sessionStorage.getItem("userEmail");
+
+if (userEmail === "admin.library@mail.com") {
+  document.querySelector("#loan_book").textContent = "Sign in as user to loan";
+  document.querySelector("#loan_book").classList.add("adm_acc");
+} else {
+  document.querySelector("#loan_book").addEventListener("click", loanBook);
+}
 
 async function fetchBook() {
   if (!bookId) {

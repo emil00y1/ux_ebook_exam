@@ -1,8 +1,10 @@
 document.querySelector("#book_details").addEventListener("submit", loadBook);
-const userId = sessionStorage.getItem("userId");
+const userEmail = sessionStorage.getItem("userEmail");
 
-if (!userId) {
+if (!userEmail) {
   window.location.href = "login.html";
+} else if (userEmail !== "admin.library@mail.com") {
+  window.location.href = "index.html";
 }
 
 async function loadBook(event) {
