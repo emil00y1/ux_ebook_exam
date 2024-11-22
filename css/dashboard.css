@@ -94,3 +94,19 @@ dialog.loan_history {
 .close-button:focus-visible {
   outline: 2px solid var(--second-accent-color);
 }
+
+/* Dashboard forms */
+
+section > form {
+  margin-top: 2rem;
+  div:not(:last-child) {
+    margin-bottom: 0.8rem;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+    gap: 0.2rem;
+  }
+}
