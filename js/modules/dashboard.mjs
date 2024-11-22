@@ -1,4 +1,9 @@
 document.querySelector("#book_details").addEventListener("submit", loadBook);
+const userId = sessionStorage.getItem("userId");
+
+if (!userId) {
+  window.location.href = "login.html";
+}
 
 async function loadBook(event) {
   event.preventDefault(); // Prevent default form submission
