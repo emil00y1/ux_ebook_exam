@@ -50,11 +50,12 @@ function handleLoginSubmit(event) {
       .then((data) => {
         if (data.user_id) {
           // If user_id exists, login is successful
+          sessionStorage.setItem("userId", data.user_id);
           sessionStorage.setItem(
             "userEmail",
             document.getElementById("email").value
-          ); // Store email in sessionStorage
-          window.location.href = "/index.html"; // Redirect to homepage
+          );
+          window.location.href = "/index.html";
         }
       })
       .catch((error) => {

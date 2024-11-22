@@ -13,7 +13,6 @@ async function fetchBook() {
   }
 
   const apiEndpoint = `http://localhost:8080/books/${bookId}`;
-  console.log(apiEndpoint);
   try {
     const response = await fetch(apiEndpoint);
 
@@ -23,6 +22,7 @@ async function fetchBook() {
 
     const book = await response.json();
 
+    document.querySelector("title").textContent = book.title;
     document.querySelector("h1").textContent = book.title;
     document.querySelector(".author").textContent = book.author;
     document.querySelector(".publisher").textContent = book.publishing_company;
