@@ -33,6 +33,10 @@ a:hover {
   display: none;
 }
 
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
 /* HEADER */
 
 body#home_page > header {

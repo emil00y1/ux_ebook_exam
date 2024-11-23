@@ -34,7 +34,11 @@ section.book_details_container {
   margin-bottom: 1rem;
 }
 
-/* DIALOG - LOAN BOOK */
+/* DIALOG - LOAN HISTORY */
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
 dialog.loan_history {
   border: none;
@@ -43,7 +47,7 @@ dialog.loan_history {
 
   /* Styling */
   background: white;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 
   /* Center the dialog */
@@ -70,7 +74,7 @@ dialog.loan_history {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  padding: 8px;
+  padding: 0.5rem;
   border: none;
   background: transparent;
   border-radius: 50%;

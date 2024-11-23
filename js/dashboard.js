@@ -45,7 +45,7 @@ async function loadBook(event) {
         : "img/img-placeholder.webp";
     coverImg.alt = `Book cover for ${book.title}`;
 
-    const bookLoans = book.loans;
+    const bookLoans = book.loans.reverse();
     console.log(bookLoans);
     document
       .querySelector("#show_loan_history")

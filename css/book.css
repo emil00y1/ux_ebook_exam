@@ -21,6 +21,10 @@ button#loan_book {
 
 /* DIALOG - LOAN BOOK */
 
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 dialog.loan_error {
   border: none;
   padding: 3rem 2.5rem;
@@ -29,7 +33,7 @@ dialog.loan_error {
 
   /* Styling */
   background: white;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 
   /* Center the dialog */
@@ -57,7 +61,7 @@ dialog.loan_error {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  padding: 8px;
+  padding: 0.5rem;
   border: none;
   background: transparent;
   border-radius: 50%;
