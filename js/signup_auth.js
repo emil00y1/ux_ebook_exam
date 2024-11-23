@@ -15,7 +15,7 @@ function handleFormSubmit(event) {
   const firstName = document.getElementById("first_name");
   if (firstName.value.trim().length < 2) {
     document.getElementById("first_name-error").textContent =
-      "First name must be at least 2 characters long";
+      "Must be at least 2 characters long";
     isValid = false;
   }
 
@@ -23,7 +23,7 @@ function handleFormSubmit(event) {
   const lastName = document.getElementById("last_name");
   if (lastName.value.trim().length < 2) {
     document.getElementById("last_name-error").textContent =
-      "Last name must be at least 2 characters long";
+      "Must be at least 2 characters long";
     isValid = false;
   }
 
@@ -44,7 +44,7 @@ function handleFormSubmit(event) {
 
   if (!passwordRegex.test(password.value)) {
     document.getElementById("password-error").textContent =
-      "Password must be at least 8 characters, include 1 lowercase, 1 uppercase, 1 number, and 1 special character";
+      "Must include at least 8 characters, 1 lowercase, 1 uppercase, 1 number, and 1 special character";
     isValid = false;
   }
 
@@ -59,7 +59,7 @@ function handleFormSubmit(event) {
   const address = document.getElementById("address");
   if (address.value.trim().length < 5) {
     document.getElementById("address-error").textContent =
-      "Address must be at least 5 characters long";
+      "Must be at least 5 characters long";
     isValid = false;
   }
 
@@ -68,7 +68,7 @@ function handleFormSubmit(event) {
   const phoneRegex = /^\d{8}$/;
   if (!phoneRegex.test(phoneNumber.value)) {
     document.getElementById("phone_number-error").textContent =
-      "Phone number must be 8 digits";
+      "Must be 8 digits";
     isValid = false;
   }
   if (isValid) {

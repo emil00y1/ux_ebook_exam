@@ -67,3 +67,8 @@ p.description {
   max-width: 450px;
   margin-top: 1rem;
 }
+
+.error {
+  color: var(--error);
+  font-size: 0.85rem;
+}
