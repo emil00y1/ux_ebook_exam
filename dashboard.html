@@ -102,35 +102,50 @@
           <a href="#add_author">Add author</a>
           <a href="#add_publisher">Add publisher</a>
         </div>
-        <form id="add_book">
+        <form id="add_book" novalidate>
           <h3>Add book</h3>
           <div>
             <label for="add_title">Title</label
-            ><input type="text" id="add_title" />
+            ><input type="text" id="add_title" name="title" required />
+            <span class="error"></span>
           </div>
           <div>
-            <label for="add_author">Author ID</label
-            ><input type="text" id="add_author" />
+            <label for="add_author_id">Author ID</label
+            ><input type="text" id="add_author_id" name="author_id" required />
+            <span class="error"></span>
           </div>
           <div>
-            <label for="add_publisher">Publisher ID</label
-            ><input type="text" id="add_publisher" />
+            <label for="add_publisher_id">Publisher ID</label
+            ><input
+              type="text"
+              id="add_publisher_id"
+              name="publisher_id"
+              required
+            />
+            <span class="error"></span>
           </div>
           <div>
             <label for="add_year">Publishing Year</label
-            ><input type="text" id="add_year" />
+            ><input type="text" id="add_year" name="publishing_year" required />
+            <span class="error"></span>
           </div>
+          <span class="error"></span>
           <button type="submit">Add book</button>
         </form>
         <form id="add_author">
           <h3>Add author</h3>
           <div>
             <label for="add_first_name">First Name</label
-            ><input type="text" id="add_first_name" />
+            ><input
+              type="text"
+              id="add_first_name"
+              name="first_name"
+              required
+            />
           </div>
           <div>
             <label for="add_last_name">Last Name</label
-            ><input type="text" id="add_last_name" />
+            ><input type="text" id="add_last_name" name="last_name" required />
           </div>
 
           <button type="submit">Add author</button>
@@ -139,9 +154,9 @@
           <h3>Add publisher</h3>
           <div>
             <label for="add_publisher_name">Name</label
-            ><input type="text" id="add_publisher_name" />
+            ><input type="text" id="add_publisher_name" name="name" required />
           </div>
-
+          <span class="error"></span>
           <button type="submit">Add publisher</button>
         </form>
       </section>

@@ -1,4 +1,9 @@
 document.querySelector("#book_details").addEventListener("submit", loadBook);
+document.querySelector("#add_book").addEventListener("submit", addBook);
+document.querySelector("#add_author").addEventListener("submit", addAuthor);
+document
+  .querySelector("#add_publisher")
+  .addEventListener("submit", addPublisher);
 const userEmail = sessionStorage.getItem("userEmail");
 
 if (!userEmail) {
@@ -91,4 +96,86 @@ async function showLoanHistory(bookLoans) {
   });
 
   dialog.showModal();
+}
+
+async function addBook(event) {
+  event.preventDefault();
+
+  const publishYear = document.getElementById("add_year").value;
+
+  // Validate year
+  const currentYear = new Date().getFullYear();
+  if (parseInt(publishYear) > currentYear) {
+    document.querySelector(
+      "#add_book .error"
+    ).textContent = `Publishing year can not be higher than ${currentYear}`;
+    return;
+  }
+  const formData = new FormData(document.querySelector("#add_book"));
+
+  try {
+    const response = await fetch("http://localhost:8080/admin/books", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      document.querySelector("#add_book .error").textContent =
+        "Failed to add book. Try again.";
+      throw new Error("Failed to add book");
+    }
+    // Clear form on success
+    event.target.reset();
+    alert("Book added successfully!");
+  } catch (error) {
+    console.error("Error adding book:", error);
+    alert("Failed to add book. Please try again.");
+  }
+}
+
+async function addAuthor(event) {
+  event.preventDefault();
+
+  const formData = new FormData(document.querySelector("#add_author"));
+  try {
+    const response = await fetch("http://localhost:8080/admin/authors", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      document.querySelector("#add_author .error").textContent =
+        "Failed to add author. Try again.";
+      throw new Error("Failed to add author");
+    }
+    // Clear form on success
+    event.target.reset();
+    alert("author added successfully!");
+  } catch (error) {
+    console.error("Error adding author:", error);
+    alert("Failed to add author. Please try again.");
+  }
+}
+async function addPublisher(event) {
+  event.preventDefault();
+
+  const formData = new FormData(document.querySelector("#add_publisher"));
+  try {
+    const response = await fetch("http://localhost:8080/admin/publishers", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      document.querySelector("#add_publisher .error").textContent =
+        "Failed to add publisher. Try again.";
+      throw new Error("Failed to add publisher");
+    }
+    // Clear form on success
+    event.target.reset();
+    alert("Publisher added successfully!");
+  } catch (error) {
+    console.error("Error adding publisher:", error);
+    alert("Failed to add publisher. Please try again.");
+  }
 }

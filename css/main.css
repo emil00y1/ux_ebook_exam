@@ -37,6 +37,11 @@ body:has(dialog[open]) {
   overflow: hidden;
 }
 
+.error {
+  color: var(--error);
+  font-size: 0.85rem;
+}
+
 /* HEADER */
 
 body#home_page > header {
