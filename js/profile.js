@@ -30,6 +30,8 @@ async function fetchUser() {
     document.querySelector("#address").value = user.address;
     document.querySelector("#phone_number").value = user.phone_number;
     document.querySelector("#birth_date").value = user.birth_date;
+    document.querySelector("#membership_date").textContent =
+      user.membership_date;
   } catch (error) {
     console.log(error);
     document.querySelector(
@@ -103,12 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Success handling
-        document.querySelector("#update-success").textContent =
+        document.querySelector("#update-status").textContent =
           "Profile successfully updated!";
       } catch (error) {
-        console.log("Update failed:", error);
-        errorElements["login"].textContent =
-          "Failed to update profile. Please try again.";
+        document.querySelector("#update-status").textContent =
+          "An error occured. Please try again later.";
       }
     }
   });
