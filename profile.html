@@ -85,7 +85,7 @@
       </div>
     </header>
     <main>
-      <div>
+      <section class="content">
         <h1></h1>
         <p class="membership">
           Member since <span id="membership_date"></span>
@@ -155,12 +155,18 @@
             <span class="error" id="birth_date-error"></span>
           </div>
           <span class="error" id="login-error"></span>
-          <div class="update_btn">
-            <p id="update-status"></p>
+          <p id="update-status"></p>
+          <div class="button_group">
+            <button type="button" class="delete" aria-label="Delete account">
+              Delete Account
+            </button>
             <button type="submit" class="btn">Save changes</button>
           </div>
         </form>
-      </div>
+      </section>
+      <section>
+        <img src="img/profile-deco.jpg" alt="coffee and ebook" />
+      </section>
     </main>
 
     <footer>
@@ -180,5 +186,26 @@
         </a>
       </div>
     </footer>
+    <dialog
+      id="delete-modal"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
+    >
+      <div class="modal-content">
+        <h2 id="modal-title">Delete Account</h2>
+        <p id="modal-description">
+          Are you sure you want to delete your account? This action cannot be
+          undone.
+        </p>
+        <div class="modal-buttons">
+          <button type="button" class="btn secondary" data-action="cancel">
+            Cancel
+          </button>
+          <button type="button" class="btn delete" data-action="confirm">
+            Delete Account
+          </button>
+        </div>
+      </div>
+    </dialog>
   </body>
 </html>

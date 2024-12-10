@@ -17,12 +17,13 @@
   --main-grey: #333333;
   --light-grey: #e9e9e9;
   --approved: #22c55e;
-  --error: #ef4444;
+  --error: #de3c3c;
+  --error-hover: #f05151;
 }
 
 /* General styling */
 body {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -33,6 +34,9 @@ body a {
 
 body:not(#home_page) main {
   margin: 2rem 1.5rem;
+  max-width: 1440px;
+  align-self: center;
+  height: 100%;
 }
 
 a {
@@ -56,12 +60,29 @@ body:has(dialog[open]) {
   font-size: 0.85rem;
 }
 
+@media (min-width: 756px) {
+  body:not(#home_page) main {
+    margin: 4rem 1.5rem;
+  }
+}
+
+@media (min-width: 976px) {
+  body:not(#home_page) main {
+    margin: 6rem 1.5rem;
+  }
+}
+
+@media (min-width: 1240px) {
+  body:not(#home_page) main {
+    margin: 8rem 1.5rem;
+  }
+}
+
 /* General btn styling */
 
 .btn {
   max-width: max-content;
   padding: 0.9rem 1.25rem;
-  align-self: center;
   border: none;
   border-radius: 0.625rem;
   background-color: var(--accent-color);
@@ -207,17 +228,11 @@ header img {
 
 #login_btn,
 #signup_btn {
-  background-color: var(--accent-color);
   border: none;
-  padding: 0.4rem 1.2rem;
   text-decoration: none;
   border-radius: 10rem;
   color: var(--main-color);
   align-self: center;
-}
-
-#profile_btn {
-  display: flex;
 }
 
 #profile_btn svg {
@@ -401,5 +416,10 @@ body#home_page header #desktop_search_form input {
 
   #home_btn {
     display: none;
+  }
+  #login_btn,
+  #signup_btn {
+    background-color: var(--accent-color);
+    padding: 0.4rem 1.2rem;
   }
 }

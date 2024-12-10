@@ -20,7 +20,7 @@ form#profileForm {
       gap: 0.25rem;
     }
   }
-  > div {
+  > div:not(.button_group) {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
@@ -32,13 +32,51 @@ form#profileForm {
     background-color: var(--light-grey);
     font-size: 0.9rem;
   }
-  .update_btn button {
-    margin-top: 1rem;
+  .button_group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+  }
+  .button_group button {
+    width: 100%;
+    max-width: none;
+  }
+
+  .button_group .delete {
+    padding: 0.9rem 1.25rem;
+    border: none;
+    border-radius: 0.625rem;
+    background-color: var(--error);
+    color: var(--main-color);
+    cursor: pointer;
+  }
+
+  .button_group .delete:hover {
+    background-color: var(--error-hover);
+    color: var(--secondary-color);
   }
 
   #update-status {
     color: var(--approved);
     font-weight: 500;
+  }
+}
+
+body#profile_page main section:nth-child(2) {
+  display: none;
+}
+
+@media (min-width: 380px) {
+  form#profileForm {
+    .button_group button {
+      max-width: max-content;
+    }
+    .button_group {
+      flex-direction: row;
+      margin-top: 0.5rem;
+    }
   }
 }
 
@@ -48,10 +86,100 @@ form#profileForm {
     margin-inline: 0;
     padding-inline: 1.5rem;
   }
-  body#profile_page main > div {
+  body#profile_page main > section.content {
     width: 100%;
     max-width: 480px;
     margin-right: auto;
     margin-left: auto;
   }
+}
+
+@media (min-width: 976px) {
+  body#profile_page main {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+  }
+  body#profile_page main section.content {
+    margin-top: 4rem;
+    padding-inline: 4rem;
+    width: 100%;
+    form#profileForm {
+      max-width: 480px;
+    }
+  }
+  body#profile_page main section:nth-child(2) {
+    height: 100%;
+    display: grid;
+  }
+  body#profile_page main section:nth-child(2) img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+    max-height: 800px;
+  }
+}
+
+/* Confirm deletion modal */
+
+dialog {
+  padding: 0;
+  border: none;
+  border-radius: 0.5rem;
+  max-width: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  padding: 2rem;
+}
+
+.modal-content h2 {
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+}
+
+.modal-content p {
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.modal-buttons .btn {
+  padding: 0.5rem 1rem;
+}
+
+.modal-buttons .secondary {
+  background-color: transparent;
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+}
+.modal-buttons .secondary:hover {
+  background-color: var(--main-color);
+}
+
+.modal-buttons .delete {
+  background-color: var(--error);
+  color: var(--main-color);
+}
+
+.modal-buttons .delete:hover {
+  background-color: var(--error-hover);
+  color: var(--secondary-color);
 }
