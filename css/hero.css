@@ -3,7 +3,7 @@
 .hero {
   position: relative;
   height: 100vh;
-  background-image: url(/img/stock-photo.png);
+  background-image: url(/img/hero-image.png);
   background-size: cover;
   background-position: center;
   display: flex;

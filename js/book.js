@@ -1,15 +1,23 @@
+import { authorCache } from "./authorCache.js";
+import { initializeBackButton } from "./backButton.js";
 window.addEventListener("load", fetchBook);
+window.addEventListener("load", fetchRecommendedBooks);
 
 const urlParams = new URLSearchParams(window.location.search);
 const bookId = urlParams.get("id");
 const userEmail = sessionStorage.getItem("userEmail");
 
-if (userEmail === "admin.library@mail.com") {
-  document.querySelector("#loan_book").textContent = "Sign in as user to loan";
-  document.querySelector("#loan_book").classList.add("adm_acc");
-} else {
-  document.querySelector("#loan_book").addEventListener("click", loanBook);
-}
+document.addEventListener("DOMContentLoaded", () => {
+  initializeBackButton();
+  if (userEmail === "admin.library@mail.com") {
+    document.querySelector("#loan_book").textContent =
+      "Sign in as user to loan";
+    document.querySelector("#loan_book").classList.add("adm_acc");
+  } else {
+    document.querySelector("#loan_book").addEventListener("click", loanBook);
+  }
+  fetchBook();
+});
 
 async function fetchBook() {
   if (!bookId) {
@@ -20,26 +28,37 @@ async function fetchBook() {
     return;
   }
 
-  const apiEndpoint = `http://localhost:8080/books/${bookId}`;
   try {
-    const response = await fetch(apiEndpoint);
-
+    const response = await fetch(`http://localhost:8080/books/${bookId}`);
     if (!response.ok) {
       throw new Error(`API Error: Problem fetching data from the api`);
     }
 
     const book = await response.json();
 
+    // Get the author ID from our cache
+    const authorId = await authorCache.getAuthorId(book.author);
+
+    // Update the page content
     document.querySelector("title").textContent = book.title;
     document.querySelector("h1").textContent = book.title;
-    document.querySelector(".author").textContent = book.author;
+
+    // Create author link if we have an ID, otherwise just show the name
+    const authorElement = document.querySelector(".author");
+    if (authorId) {
+      authorElement.innerHTML = `<a href="author.html?id=${authorId}">${book.author}</a>`;
+    } else {
+      authorElement.textContent = book.author;
+    }
+
     document.querySelector(".publisher").textContent = book.publishing_company;
     document.querySelector(".year").textContent = book.publishing_year;
+
     const coverImg = document.querySelector(".cover img");
     coverImg.src =
       book.cover && book.cover.trim() !== ""
         ? book.cover
-        : "img/stock-photo.webp";
+        : "img/placeholder.jpg";
     coverImg.alt = `Book cover for ${book.title}`;
   } catch (error) {
     console.log(error);
@@ -48,7 +67,6 @@ async function fetchBook() {
     ).innerHTML = `<p>Could not load the book. Try again later.</p>`;
   }
 }
-
 async function loanBook() {
   const userId = sessionStorage.getItem("userId");
 
@@ -100,4 +118,48 @@ async function loanBook() {
 
     // Handle error appropriately - maybe show an error message to user
   }
+}
+
+// Fetch and display recommended books
+async function fetchRecommendedBooks() {
+  try {
+    const response = await fetch("http://localhost:8080/books?n=5");
+    if (!response.ok) {
+      throw new Error("Failed to fetch recommendations");
+    }
+
+    const books = await response.json();
+    const recommendationsContainer = document.querySelector(
+      ".recommendations-scroll"
+    );
+
+    books.forEach((book) => {
+      const card = createBookCard(book);
+      recommendationsContainer.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Error fetching recommendations:", error);
+  }
+}
+
+// Create a book card element
+function createBookCard(book) {
+  const card = document.createElement("div");
+  card.className = "recommendation-card";
+
+  card.innerHTML = `
+    <a href="book.html?id=${book.id}">
+      <div class="card-cover">
+        <img src="${book.cover || "img/placeholder.jpg"}" 
+             alt="Cover of ${book.title}" 
+             loading="lazy">
+      </div>
+      <div class="card-content">
+        <h3>${book.title}</h3>
+        <p class="author">${book.author}</p>
+      </div>
+    </a>
+  `;
+
+  return card;
 }

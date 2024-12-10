@@ -1,3 +1,10 @@
+import { initializeBackButton } from "./backButton.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  initializeBackButton();
+  renderAuthorPage;
+});
+
 async function fetchAuthorBooks(authorId) {
   try {
     const response = await fetch(`http://127.0.0.1:8080/books?a=${authorId}`);
@@ -41,5 +48,3 @@ async function renderAuthorPage() {
   const authorName = books.length > 0 ? books[0].author : "Unknown Author";
   document.getElementById("author-name").textContent = authorName;
 }
-
-document.addEventListener("DOMContentLoaded", renderAuthorPage);

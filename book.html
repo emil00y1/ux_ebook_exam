@@ -6,10 +6,10 @@
     <title></title>
     <script src="js/common.js" defer></script>
     <script type="module" src="js/book.js"></script>
-    <link rel="stylesheet" href="css/book.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/book.css" />
   </head>
-  <body>
+  <body id="book_page">
     <header>
       <a href="index.html"><img src="img/logo.png" alt="ebook logo" /></a>
       <form id="desktop_search_form" class="search_form">
@@ -85,6 +85,19 @@
       </div>
     </header>
     <main>
+      <div class="back-navigation">
+        <button class="back-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 -960 960 960"
+            width="24"
+          >
+            <path d="M400-80 0-480l400-400 56 57-343 343 343 343-56 57Z" />
+          </svg>
+          Back
+        </button>
+      </div>
       <section id="book">
         <div class="cover">
           <img src="" alt="" />
@@ -92,11 +105,11 @@
         <div id="content">
           <h1></h1>
           <div class="details">
-            <p class="author"></p>
+            <a class="author" href=""></a>
             <p class="publisher"></p>
             <p class="year"></p>
           </div>
-          <button id="loan_book">Loan book</button>
+          <button id="loan_book" class="btn">Loan book</button>
         </div>
         <dialog class="loan_error">
           <button class="close-button" aria-label="Close dialog">
@@ -150,6 +163,12 @@
             <p class="email-link"></p>
           </div>
         </dialog>
+      </section>
+      <section class="book-recommendations">
+        <h2>You may also like</h2>
+        <div class="recommendations-container">
+          <div class="recommendations-scroll"></div>
+        </div>
       </section>
     </main>
 

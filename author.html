@@ -6,8 +6,10 @@
     <title>Author's Books</title>
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/cards.css" />
+    <script src="js/common.js" defer></script>
+    <script src="js/authorBooks.js" type="module"></script>
   </head>
-  <body>
+  <body id="author_page">
     <header>
       <a href="index.html"><img src="img/logo.png" alt="ebook logo" /></a>
       <form id="desktop_search_form" class="search_form">
@@ -83,6 +85,19 @@
       </div>
     </header>
     <main>
+      <div class="back-navigation">
+        <button class="back-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 -960 960 960"
+            width="24"
+          >
+            <path d="M400-80 0-480l400-400 56 57-343 343 343 343-56 57Z" />
+          </svg>
+          Back
+        </button>
+      </div>
       <section id="author-section">
         <h1 id="author-name">Author Name</h1>
         <h2>Books by this author:</h2>
@@ -120,6 +135,5 @@
         </a>
       </div>
     </template>
-    <script type="module" src="js/modules/authorBooks.js"></script>
   </body>
 </html>

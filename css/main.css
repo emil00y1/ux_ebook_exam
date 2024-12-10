@@ -38,12 +38,7 @@ body:not(#home_page) main {
   max-width: 1440px;
   align-self: center;
   height: 100%;
-}
-
-@media (min-width: 656px) {
-  body:not(#home_page) main {
-    width: 100%;
-  }
+  width: 100%;
 }
 
 a {
@@ -443,4 +438,33 @@ body#home_page header #desktop_search_form input {
     background-color: var(--accent-color);
     padding: 0.4rem 1.2rem;
   }
+}
+
+/* Back navigation */
+.back-navigation {
+  padding: 1rem 0;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: none;
+  background: none;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+  transform: translateX(-4px);
+}
+
+.back-button svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
 }

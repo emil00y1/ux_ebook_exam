@@ -1,3 +1,5 @@
+import { authorCache } from "./authorCache.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#book_details").addEventListener("submit", loadBook);
   document.querySelector("#add_book").addEventListener("submit", addBook);
@@ -217,56 +219,40 @@ async function addBook(event) {
 
 async function addAuthor(event) {
   event.preventDefault();
-  const form = event.target;
-  const statusElement = form.querySelector(".status");
-  const inputs = form.querySelectorAll("input[required]");
-  let hasErrors = false;
+  const statusElement = event.target.querySelector(".status");
+  const formData = new FormData(event.target);
 
-  // Clear any previous error states
-  form.querySelectorAll(".error").forEach((error) => {
-    error.textContent = "";
-    error.classList.add("hidden");
-  });
-  form.querySelectorAll("input").forEach((input) => {
-    input.classList.remove("error-input");
-  });
-
-  // Validate each required field
-  inputs.forEach((input) => {
-    if (!input.value.trim()) {
-      const errorSpan = input.parentElement.querySelector(".error");
-      errorSpan.textContent = "Required field";
-      errorSpan.classList.remove("hidden");
-      input.classList.add("error-input");
-      hasErrors = true;
-    }
-  });
-
-  if (hasErrors) return;
-
-  const formData = new FormData(form);
   try {
     const response = await fetch("http://localhost:8080/admin/authors", {
       method: "POST",
       body: formData,
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
       statusElement.textContent = "Failed to add author. Try again.";
-      statusElement.classList.remove("success", "hidden");
+      statusElement.classList.remove("success");
       statusElement.classList.add("error");
       throw new Error("Failed to add author");
     }
 
-    form.reset();
+    // Clear form and show success message
+    event.target.reset();
     statusElement.textContent =
       "The author was successfully added to the system.";
-    statusElement.classList.remove("error", "hidden");
+    statusElement.classList.remove("error");
     statusElement.classList.add("success");
+
+    // Update the author cache with the new author
+    const firstName = formData.get("first_name");
+    const lastName = formData.get("last_name");
+    const fullName = `${firstName} ${lastName}`;
+    authorCache.addAuthor(fullName, data.author_id);
   } catch (error) {
     console.error("Error adding author:", error);
     statusElement.textContent = "Failed to add author. Try again.";
-    statusElement.classList.remove("success", "hidden");
+    statusElement.classList.remove("success");
     statusElement.classList.add("error");
   }
 }

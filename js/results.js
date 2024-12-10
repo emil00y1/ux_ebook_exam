@@ -1,4 +1,8 @@
-window.addEventListener("load", fetchResults);
+import { initializeBackButton } from "./backButton.js";
+document.addEventListener("DOMContentLoaded", () => {
+  initializeBackButton();
+  fetchResults();
+});
 
 async function fetchResults() {
   const urlParams = new URLSearchParams(window.location.search);
