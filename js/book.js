@@ -142,24 +142,21 @@ async function fetchRecommendedBooks() {
   }
 }
 
-// Create a book card element
 function createBookCard(book) {
-  const card = document.createElement("div");
-  card.className = "recommendation-card";
+  const template = document.getElementById("book_card_template");
+  const card = template.content.cloneNode(true);
 
-  card.innerHTML = `
-    <a href="book.html?id=${book.id}">
-      <div class="card-cover">
-        <img src="${book.cover || "img/placeholder.jpg"}" 
-             alt="Cover of ${book.title}" 
-             loading="lazy">
-      </div>
-      <div class="card-content">
-        <h3>${book.title}</h3>
-        <p class="author">${book.author}</p>
-      </div>
-    </a>
-  `;
+  const cardLink = card.querySelector("a");
+  const coverImage = card.querySelector("img");
+  const titleElement = card.querySelector("h3");
+  const authorElement = card.querySelector(".author");
+
+  // Update the elements with book data
+  cardLink.href = `book.html?id=${book.id}`;
+  coverImage.src = book.cover || "img/placeholder.jpg";
+  coverImage.alt = `Cover of ${book.title}`;
+  titleElement.textContent = book.title;
+  authorElement.textContent = book.author;
 
   return card;
 }
