@@ -45,8 +45,8 @@ body#results_page main {
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
   }
-  section#results .card {
-    margin-bottom: 1rem;
+  section#results .card:not(:last-child) {
+    margin: 0;
   }
 }
 
