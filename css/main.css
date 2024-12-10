@@ -67,6 +67,13 @@ body:has(dialog[open]) {
   font-size: 0.85rem;
 }
 
+.header-buttons a.active_page {
+  color: var(--second-accent-color);
+}
+.header-buttons a.active_page svg {
+  fill: var(--second-accent-color);
+}
+
 @media (min-width: 756px) {
   body:not(#home_page) main {
     padding: 4rem 2.5rem;
@@ -238,7 +245,6 @@ header img {
   border: none;
   text-decoration: none;
   border-radius: 10rem;
-  color: var(--main-color);
   align-self: center;
 }
 
@@ -323,6 +329,10 @@ footer .some_icons img {
 @media (min-width: 756px) {
   footer .some_icons img {
     max-width: 35px;
+  }
+  #login_btn,
+  #signup_btn {
+    color: var(--main-color);
   }
 }
 
