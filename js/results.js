@@ -36,15 +36,13 @@ async function fetchResults() {
         .getElementById("book-card-template")
         .content.cloneNode(true);
 
-      template.querySelector(".card-header").textContent =
+      template.querySelector(".card-header .publisher").textContent =
         result.publishing_company;
       template.querySelector("h3").textContent = result.title;
-      template.querySelector(
-        ".author"
-      ).textContent = `Author: ${result.author}`;
+      template.querySelector(".author").textContent = `${result.author}`;
       template.querySelector(
         ".published-year"
-      ).textContent = `Published: ${result.publishing_year}`;
+      ).textContent = `${result.publishing_year}`;
       template.querySelector("a").href = `book.html?id=${result.book_id}`;
       document.querySelector("#results").appendChild(template);
     });

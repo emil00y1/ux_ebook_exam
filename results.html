@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/results.css" />
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body>
+  <body id="results_page">
     <header>
       <a href="index.html"><img src="img/logo.png" alt="ebook logo" /></a>
       <form id="desktop_search_form" class="search_form">
@@ -108,9 +108,11 @@
     </footer>
   </body>
   <template id="book-card-template">
-    <div class="card">
+    <article class="card">
       <a href="">
-        <div class="card-header"></div>
+        <div class="card-header">
+          <p class="publisher"></p>
+        </div>
         <div class="card-content">
           <h3></h3>
           <p class="author"></p>
@@ -120,6 +122,6 @@
           <p>More info</p>
         </div>
       </a>
-    </div>
+    </article>
   </template>
 </html>

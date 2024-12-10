@@ -138,6 +138,10 @@ header img {
 #desktop_search_form {
   display: none;
 }
+#desktop_search_form label,
+#mobile_search_form label {
+  display: flex;
+}
 
 #mobile_search_form {
   display: flex;

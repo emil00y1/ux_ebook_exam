@@ -6,7 +6,54 @@ section#results .card:not(:last-child) {
   margin-bottom: 1rem;
 }
 
+.card {
+  box-shadow: 1px 1px 3px var(--light-shadow);
+  border-radius: 1rem;
+}
 .card a {
+  display: block;
+  padding: 1.5rem;
   text-decoration: none;
   color: var(--secondary-color);
+}
+
+.card .publisher {
+  font-size: 0.9rem;
+  color: var(--main-grey);
+}
+
+.card-footer {
+  margin-top: 1rem;
+}
+
+.card-footer p {
+  color: var(--accent-color);
+}
+
+.card-content .published-year {
+  color: var(--main-grey);
+  font-size: 0.9rem;
+}
+
+body#results_page main {
+  width: 100%;
+}
+
+@media (min-width: 756px) {
+  section#results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  section#results .card {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 1080px) {
+  section#results {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+  }
 }
