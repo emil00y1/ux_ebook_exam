@@ -86,120 +86,161 @@
     </header>
     <main>
       <h1>Admin Dashboard</h1>
-      <section>
-        <h2>Find book</h2>
-        <p>Look up details and loan history about any book</p>
-        <form id="book_details">
-          <div>
-            <label for="book_id">Book Id</label>
-            <input type="number" id="book_id" required />
+      <section class="find_book">
+        <section>
+          <h2>Find book</h2>
+          <p>Look up details and loan history about any book</p>
+          <form id="book_details" novalidate>
+            <div>
+              <label for="book_id">Book Id</label>
+              <input type="number" id="book_id" required />
+              <span class="error hidden"></span>
+            </div>
+            <button class="btn" type="submit" class="search_book">
+              Search
+            </button>
+          </form>
+        </section>
+        <section class="book_details_container hidden">
+          <div class="cover">
+            <img src="" alt="" />
           </div>
-          <button type="submit" class="search_book">Search</button>
-        </form>
-      </section>
-      <section class="book_details_container">
-        <div class="cover">
-          <img src="" alt="" />
-        </div>
-        <div id="content">
-          <h3></h3>
-          <div class="details">
-            <p class="author"></p>
-            <p class="publisher"></p>
-            <p class="year"></p>
-          </div>
-          <button id="show_loan_history" class="hidden">
-            Show loan history
-          </button>
-          <span class="error"></span>
-        </div>
-        <dialog class="loan_history">
-          <h3>Loan history</h3>
-          <button class="close-button" aria-label="Close dialog">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-          <div class="dialog-content">
+          <div id="content">
+            <h3></h3>
+            <div class="details">
+              <p class="author"></p>
+              <div class="publishing_information">
+                <p class="publisher"></p>
+                <p class="year"></p>
+              </div>
+            </div>
+            <button id="show_loan_history" class="hidden btn">
+              Loan history
+            </button>
             <span class="error"></span>
-            <ul class="book_loans"></ul>
           </div>
-        </dialog>
+          <dialog class="loan_history">
+            <h3>Loan history</h3>
+            <button class="close-button" aria-label="Close dialog">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            <div class="dialog-content">
+              <span class="error"></span>
+              <ul class="book_loans"></ul>
+            </div>
+          </dialog>
+        </section>
       </section>
       <section id="add_content">
         <h2>Add content</h2>
-        <div>
-          <a href="#add_book">Add book</a>
-          <a href="#add_author">Add author</a>
-          <a href="#add_publisher">Add publisher</a>
-        </div>
-        <form id="add_book" novalidate>
-          <h3>Add book</h3>
-          <div>
-            <label for="add_title">Title</label
-            ><input type="text" id="add_title" name="title" required />
-            <span class="error"></span>
-          </div>
-          <div>
-            <label for="add_author_id">Author ID</label
-            ><input type="text" id="add_author_id" name="author_id" required />
-            <span class="error"></span>
-          </div>
-          <div>
-            <label for="add_publisher_id">Publisher ID</label
-            ><input
-              type="text"
-              id="add_publisher_id"
-              name="publisher_id"
-              required
-            />
-            <span class="error"></span>
-          </div>
-          <div>
-            <label for="add_year">Publishing Year</label
-            ><input type="text" id="add_year" name="publishing_year" required />
-            <span class="error"></span>
-          </div>
-          <span class="error"></span>
-          <button type="submit">Add book</button>
-        </form>
-        <form id="add_author">
-          <h3>Add author</h3>
-          <div>
-            <label for="add_first_name">First Name</label
-            ><input
-              type="text"
-              id="add_first_name"
-              name="first_name"
-              required
-            />
-          </div>
-          <div>
-            <label for="add_last_name">Last Name</label
-            ><input type="text" id="add_last_name" name="last_name" required />
+        <div class="tab-container">
+          <div class="tab-buttons">
+            <button class="tab-button" data-tab="book_tab">Book</button>
+            <button class="tab-button" data-tab="author_tab">Author</button>
+            <button class="tab-button" data-tab="publisher_tab">
+              Publisher
+            </button>
           </div>
 
-          <button type="submit">Add author</button>
-        </form>
-        <form id="add_publisher">
-          <h3>Add publisher</h3>
-          <div>
-            <label for="add_publisher_name">Name</label
-            ><input type="text" id="add_publisher_name" name="name" required />
+          <div id="book_tab" class="tab-content">
+            <form novalidate id="add_book">
+              <h3>Add Book</h3>
+              <div>
+                <label for="add_title">Title</label>
+                <input type="text" id="add_title" name="title" required />
+                <span class="error hidden"></span>
+              </div>
+              <div>
+                <label for="add_author_id">Author ID</label>
+                <input
+                  type="text"
+                  id="add_author_id"
+                  name="author_id"
+                  required
+                />
+                <span class="error hidden"></span>
+              </div>
+              <div>
+                <label for="add_publisher_id">Publisher ID</label>
+                <input
+                  type="text"
+                  id="add_publisher_id"
+                  name="publisher_id"
+                  required
+                />
+                <span class="error hidden"></span>
+              </div>
+              <div>
+                <label for="add_year">Publishing Year</label>
+                <input
+                  type="text"
+                  id="add_year"
+                  name="publishing_year"
+                  required
+                />
+                <span class="error hidden"></span>
+              </div>
+              <span class="status hidden"></span>
+              <button class="btn" type="submit">Add book</button>
+            </form>
           </div>
-          <span class="error"></span>
-          <button type="submit">Add publisher</button>
-        </form>
+          <div id="author_tab" class="tab-content">
+            <form id="add_author" novalidate>
+              <h3>Add Author</h3>
+              <div>
+                <label for="add_first_name">First Name</label>
+                <input
+                  type="text"
+                  id="add_first_name"
+                  name="first_name"
+                  required
+                />
+                <span class="error hidden"></span>
+              </div>
+              <div>
+                <label for="add_last_name">Last Name</label>
+                <input
+                  type="text"
+                  id="add_last_name"
+                  name="last_name"
+                  required
+                />
+                <span class="error hidden"></span>
+              </div>
+              <span class="status hidden"></span>
+              <button class="btn" type="submit">Add author</button>
+            </form>
+          </div>
+          <div id="publisher_tab" class="tab-content">
+            <form id="add_publisher" novalidate>
+              <h3>Add Publisher</h3>
+              <div>
+                <label for="add_publisher_name">Name</label>
+                <input
+                  type="text"
+                  id="add_publisher_name"
+                  name="name"
+                  required
+                />
+                <span class="error hidden"></span>
+              </div>
+              <span class="status hidden"></span>
+              <button class="btn" type="submit">Add publisher</button>
+            </form>
+          </div>
+        </div>
       </section>
     </main>
     <footer>

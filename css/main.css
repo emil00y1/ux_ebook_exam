@@ -19,11 +19,12 @@
   --approved: #22c55e;
   --error: #de3c3c;
   --error-hover: #f05151;
+  --light-shadow: #c2c2c2;
 }
 
 /* General styling */
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -33,10 +34,16 @@ body a {
 }
 
 body:not(#home_page) main {
-  margin: 2rem 1.5rem;
+  padding: 2rem 1.5rem;
   max-width: 1440px;
   align-self: center;
   height: 100%;
+}
+
+@media (min-width: 656px) {
+  body:not(#home_page) main {
+    width: 100%;
+  }
 }
 
 a {
@@ -62,19 +69,19 @@ body:has(dialog[open]) {
 
 @media (min-width: 756px) {
   body:not(#home_page) main {
-    margin: 4rem 1.5rem;
+    padding: 4rem 2.5rem;
   }
 }
 
 @media (min-width: 976px) {
   body:not(#home_page) main {
-    margin: 6rem 1.5rem;
+    padding: 6rem 4rem;
   }
 }
 
 @media (min-width: 1240px) {
   body:not(#home_page) main {
-    margin: 8rem 1.5rem;
+    padding: 8rem 6rem;
   }
 }
 
