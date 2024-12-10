@@ -11,10 +11,14 @@ section#results .card:not(:last-child) {
   border-radius: 1rem;
 }
 .card a {
-  display: block;
+  display: flex;
+  flex-direction: column;
   padding: 1.5rem;
   text-decoration: none;
   color: var(--secondary-color);
+  height: 100%;
+  width: 100%;
+  gap: 0.5rem;
 }
 
 .card .publisher {
@@ -23,11 +27,18 @@ section#results .card:not(:last-child) {
 }
 
 .card-footer {
-  margin-top: 1rem;
+  margin-top: auto;
 }
 
 .card-footer p {
   color: var(--accent-color);
+}
+
+.card-content {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .card-content .published-year {
@@ -37,6 +48,10 @@ section#results .card:not(:last-child) {
 
 body#results_page main {
   width: 100%;
+}
+
+article.card > a:hover * {
+  color: var(--second-accent-color);
 }
 
 @media (min-width: 756px) {
