@@ -423,7 +423,7 @@ body#home_page header #desktop_search_form input {
   }
 
   header .search_form input {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   #logout_btn {
@@ -436,7 +436,11 @@ body#home_page header #desktop_search_form input {
   #login_btn,
   #signup_btn {
     background-color: var(--accent-color);
-    padding: 0.4rem 1.2rem;
+    padding: 0.6rem 1.4rem;
+  }
+  #login_btn:hover,
+  #signup_btn:hover {
+    background-color: var(--second-accent-color);
   }
 }
 
