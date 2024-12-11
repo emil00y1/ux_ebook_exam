@@ -1,6 +1,6 @@
 body main#discover {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 1fr;
     gap: 20px;
     margin: 0;
     padding: 30px;
@@ -68,20 +68,23 @@ body main#discover {
     text-decoration: none;
     color: var(--secondary-color);
     display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .card-content {
-    padding: 15px;
+    padding: 1rem;
   }
   
   .card-content-author {
-    padding: 15px;
+    padding: 1rem;
   }
   
 
   .card-content h3 {
     font-size: 16px;
-    margin: 0 0 10px 0;
+    margin: 0 0 0.7rem 0;
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
@@ -90,38 +93,22 @@ body main#discover {
   
   .card-content p {
     font-size: 14px;
-    margin: 5px 0;
+    margin: 0.3rem 0;
     color: var(--secondary-color);
     opacity: 0.8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .card-footer {
-    padding: 10px 15px;
+    padding: 0.7rem 1rem;
     background-color: var(--second-accent-color);
     color: var(--main-color);
     text-align: center;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    body main#discover {
-      grid-template-columns: 1fr;
-      padding: 15px;
-    }
-    
-    .books-grid {
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
 
-    #cards-container {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-        width: 100%;
-      }
-  }
-
-  .card-author {
+    .card-author {
     width: 100%;
     border-radius: 8px;
     overflow: hidden;
@@ -146,4 +133,42 @@ body main#discover {
 
   .card-author a:hover {
     color: var(--second-accent-color);
+  } 
+  
+  /* Responsive Design */
+    @media (max-width: 1080px) {
+        body main#discover {
+          grid-template-columns: 2fr 1fr;
+          padding: 1rem;
+        }
+        
+    
+        #cards-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.3rem;
+            width: 100%;
+          }
+      }
+    
+
+  /* Responsive Design */
+  @media (max-width: 755px) {
+    body main#discover {
+      grid-template-columns: 1fr;
+      padding: 1rem;
+    }
+    
+    .books-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    #cards-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.3rem;
+        width: 100%;
+      }
   }
+
+ 
