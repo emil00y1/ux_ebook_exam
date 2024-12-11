@@ -1,67 +1,67 @@
 body main#discover {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    gap: 20px;
+    gap: 1.3rem;
     margin: 0;
-    padding: 30px;
+    padding: 2rem;
   }
   
   /* Popular Books Section */
   .popular-books {
-    padding: 30px 20px;
-    border-radius: 12px;
+    padding: 2rem 1.3rem;
+    border-radius: 0.7rem;
   }
   
   .popular-books h1 {
     font-size: 2rem;
-    margin-bottom: 20px;
+    margin-bottom: 1.3rem;
     text-align: center;
   }
   
   #cards-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
+    gap: 1.3rem;
     width: 100%;
   }
   
   /* Popular Authors Section */
   .popular-authors {
     background-color: var(--secondary-color);
-    padding: 30px 20px;
-    border-radius: 12px;
+    padding: 2rem 1.3rem;
+    border-radius: 0.7rem;
     max-height: fit-content;
   }
   
   .popular-authors h1 {
     font-size: 2rem;
     color: var(--main-color);
-    margin-bottom: 20px;
+    margin-bottom: 1.3rem;
     text-align: center;
   }
   
   .authors-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1rem;
   }
   
   /* Card Styles */
   .card {
     width: 100%;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     overflow: hidden;
     background-color: var(--main-color);
     color: var(--secondary-color);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     margin-top: 1rem;
   }
   
   .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.4rem);
+    box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
   }
   
   .card a {
@@ -83,7 +83,7 @@ body main#discover {
   
 
   .card-content h3 {
-    font-size: 16px;
+    font-size: 1rem;
     margin: 0 0 0.7rem 0;
     font-weight: bold;
     white-space: nowrap;
@@ -92,7 +92,7 @@ body main#discover {
   }
   
   .card-content p {
-    font-size: 14px;
+    font-size: 0.9rem;
     margin: 0.3rem 0;
     color: var(--secondary-color);
     opacity: 0.8;
@@ -110,11 +110,11 @@ body main#discover {
 
     .card-author {
     width: 100%;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     overflow: hidden;
     background-color: var(--main-color);
     color: var(--secondary-color);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     margin-top: 1rem;
@@ -127,7 +127,7 @@ body main#discover {
   }
 
   .card-author:hover {
-    transform: translateY(-5px);
+    transform: translateY(-0.4rem);
     color: var(--second-accent-color);
   }
 
@@ -160,7 +160,7 @@ body main#discover {
     }
     
     .books-grid {
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
     }
 
     #cards-container {
