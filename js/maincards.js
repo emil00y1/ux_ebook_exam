@@ -14,7 +14,7 @@ function renderBookCard(book) {
     .getElementById("book-card-template")
     .content.cloneNode(true);
   template.querySelector("a").href = `book.html?id=${book.book_id}`;
-  template.querySelector(".card-header").textContent = book.publishing_company;
+  template.querySelector(".publishing").textContent = book.publishing_company;
   template.querySelector("h3").textContent = book.title;
   template.querySelector(".author").textContent = `Author: ${book.author}`;
   template.querySelector(

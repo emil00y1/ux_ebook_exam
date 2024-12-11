@@ -1,122 +1,142 @@
 body main#discover {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
     margin: 0;
-}
-
-.popular-books {
-    background-color: var(--secondary-color); 
-    padding: 30px 15px;
-
+    padding: 30px;
+  }
+  
+  /* Popular Books Section */
+  .popular-books {
+    padding: 30px 20px;
+    border-radius: 12px;
   }
   
   .popular-books h1 {
     font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  #cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  /* Popular Authors Section */
+  .popular-authors {
+    background-color: var(--secondary-color);
+    padding: 30px 20px;
+    border-radius: 12px;
+    max-height: fit-content;
+  }
+  
+  .popular-authors h1 {
+    font-size: 2rem;
     color: var(--main-color);
     margin-bottom: 20px;
+    text-align: center;
   }
   
-  .carousel-wrapper {
-    overflow-x: auto;
-    white-space: nowrap;
-    scroll-behavior: smooth; /* Enable smooth scrolling */
-    padding: 10px;    
-    background-color: var(--main-color);     
-    /* border-radius: 10px; */
-  }
-  
-  .carousel {
-    display: flex;
-    gap: 15px;
-  }
-
-  .card {
-    width: 200px;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: var(--secondary-color);
-    color: var(--main-color);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for contrast */
+  .authors-list {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    flex: 0 0 calc(100% / 6 - 15px); /* Show 6 cards at a time */
-    max-width: calc(100% / 6 - 15px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
-}
-
-.card::before {
-    content: "";
-    display: block;
-    position: absolute;
-    inset: 0; 
-    pointer-events: none;
-}
-
-.card:hover {
-    transform: translateY(-5px); /* Lift the card slightly */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-    background-color: var(--secondary-color); 
-}
-
-
-.card-header {
-    padding: 10px;
-    background-color: var(--secondary-color); 
-    font-size: 12px;
-    font-weight: bold;
-    text-align: left; 
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-}
-
-.card-image {
-    background-color: var(--main-color); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 140px; 
-}
-
-.card-image img {
-    max-width: 95%; 
-    max-height: 130px; 
-    object-fit: cover; 
-    margin-top: 10px; 
-    margin-bottom: 10px; 
-}
-
-
-.card-content {
-    padding: 8px 12px; 
-    text-align: left; 
-}
-
-.card-content h3 {
-    font-size: 16px; 
-    margin: 5px 0;
-    font-weight: bold;
-    white-space: nowrap; 
+    gap: 15px;
+  }
+  
+  /* Card Styles */
+  .card {
+    width: 100%;
+    border-radius: 8px;
     overflow: hidden;
-    text-overflow: ellipsis; 
-}
-
-.card-content p {
-    font-size: 12px; 
-    margin: 2px 0;
-    color: var(--main-color); 
-}
-
-.card-footer {
-    margin-top: auto;
-    padding: 8px; 
-    background-color: var(--second-accent-color); 
-    font-size: 11px; 
-    text-align: left; 
-    color: var(--main-color);
-}
-
-.card a {
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    margin-top: 1rem;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card a {
     text-decoration: none;
-    color: var(--main-color);
-}
+    color: var(--secondary-color);
+    display: block;
+  }
+  
+  .card-content {
+    padding: 15px;
+  }
+  
+  .card-content-author {
+    padding: 15px;
+  }
+  
 
+  .card-content h3 {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .card-content p {
+    font-size: 14px;
+    margin: 5px 0;
+    color: var(--secondary-color);
+    opacity: 0.8;
+  }
+  
+  .card-footer {
+    padding: 10px 15px;
+    background-color: var(--second-accent-color);
+    color: var(--main-color);
+    text-align: center;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    body main#discover {
+      grid-template-columns: 1fr;
+      padding: 15px;
+    }
+    
+    .books-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+  }
+
+  .card-author {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    margin-top: 1rem;
+  }
+
+  .card-author a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    display: block;
+  }
+
+  .card-author:hover {
+    transform: translateY(-5px);
+    color: var(--second-accent-color);
+  }
+
+  .card-author a:hover {
+    color: var(--second-accent-color);
+  }
