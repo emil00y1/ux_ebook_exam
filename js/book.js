@@ -152,7 +152,7 @@ function createBookCard(book) {
   const authorElement = card.querySelector(".author");
 
   // Update the elements with book data
-  cardLink.href = `book.html?id=${book.id}`;
+  cardLink.href = `book.html?id=${book.book_id}`;
   coverImage.src = book.cover || "img/placeholder.jpg";
   coverImage.alt = `Cover of ${book.title}`;
   titleElement.textContent = book.title;

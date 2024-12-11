@@ -199,6 +199,10 @@ button#loan_book.adm_acc {
   color: inherit;
 }
 
+.recommendation-card a:hover * {
+  color: var(--second-accent-color);
+}
+
 .recommendation-card .card-cover {
   width: 100%;
   aspect-ratio: 3/4;
