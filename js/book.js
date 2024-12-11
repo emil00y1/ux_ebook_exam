@@ -102,7 +102,7 @@ async function loanBook() {
     ).textContent = `You have successfully loaned "${bookTitle}".`;
     document.querySelector(
       ".email-link"
-    ).textContent = `An access link will be sent to your email`;
+    ).textContent = `An access link will be sent to your email.`;
 
     dialog.showModal();
   } catch (error) {
@@ -112,7 +112,9 @@ async function loanBook() {
     document.querySelector(
       ".loan-status"
     ).textContent = `You have already loaned "${bookTitle}"`;
-    document.querySelector(".email-link").remove;
+    document.querySelector(
+      ".email-link"
+    ).textContent = `Please check your email for the access link.`;
 
     dialog.showModal();
 
