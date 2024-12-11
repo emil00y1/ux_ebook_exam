@@ -129,6 +129,10 @@ header img {
   max-width: 45px;
 }
 
+header > a:has(img) {
+  display: flex;
+}
+
 /* Search Forms */
 #desktop_search_form {
   display: none;
