@@ -45,7 +45,6 @@
 }
 
 .btn.primary {
-  background-color: var(--accent-color);
   color: var(--main-color);
 }
 
@@ -53,8 +52,4 @@
   background-color: transparent;
   color: var(--main-color);
   border: 2px solid var(--main-color);
-}
-
-.btn:hover {
-  opacity: 0.8;
 }

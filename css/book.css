@@ -251,7 +251,7 @@ button#loan_book.adm_acc {
       height: 100%;
       button#loan_book {
         margin-top: auto;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
       }
       .details .author {
         font-size: 1.1rem;
@@ -259,6 +259,11 @@ button#loan_book.adm_acc {
       .details .publisher,
       .details .year {
         font-size: 1rem;
+      }
+      .loan-info {
+        margin-bottom: 0.8rem;
+        font-size: 0.8rem;
+        color: var(--main-grey);
       }
     }
   }
