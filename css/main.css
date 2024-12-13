@@ -90,6 +90,8 @@ body:has(dialog[open]) {
 /* General btn styling */
 
 .btn {
+  display: flex;
+  align-items: center;
   max-width: max-content;
   padding: 0.9rem 1.25rem;
   border: none;
@@ -445,6 +447,9 @@ body#home_page header #desktop_search_form input {
   #login_btn:hover,
   #signup_btn:hover {
     background-color: var(--second-accent-color);
+  }
+  #desktop_search_field::placeholder{
+    color: var(--main-color);
   }
 }
 
