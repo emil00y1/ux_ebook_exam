@@ -3,7 +3,7 @@
 .hero {
   position: relative;
   height: 100vh;
-  background-image: url(/img/hero-image.png);
+  background-image: url(/img/hero-image-small.webp);
   background-size: cover;
   background-position: center;
   display: flex;
@@ -31,18 +31,12 @@
 
 
 
-
-
-
-
-
-
-
 @media (min-width: 756px){
 .hero-content {
   margin-right: 10%;
 }
 .hero{
   justify-content: flex-end;
+  background-image: url(/img/hero-image-large.webp);
 }
 }

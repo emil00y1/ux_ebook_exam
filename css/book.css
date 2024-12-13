@@ -190,6 +190,10 @@ button#loan_book.adm_acc {
   transition: transform 0.2s ease;
 }
 
+.recommendation-card:focus-within{
+  outline: 2px solid var(--accent-color);
+}
+
 .recommendation-card:hover {
   transform: translateY(-4px);
 }
