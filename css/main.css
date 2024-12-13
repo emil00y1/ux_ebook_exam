@@ -29,19 +29,8 @@ body {
   flex-direction: column;
 }
 
-body a {
-  text-decoration: none;
-}
-
-body:not(#home_page) main {
-  padding: 2rem 1.5rem;
-  max-width: 1440px;
-  align-self: center;
-  height: 100%;
-  width: 100%;
-}
-
 a {
+  text-decoration: none;
   color: var(--accent-color);
 }
 
@@ -62,11 +51,13 @@ body:has(dialog[open]) {
   font-size: 0.85rem;
 }
 
-.header-buttons a.active_page {
-  color: var(--second-accent-color);
-}
-.header-buttons a.active_page svg {
-  fill: var(--second-accent-color);
+/* Main content */
+body:not(#home_page) main {
+  padding: 2rem 1.5rem;
+  max-width: 1440px;
+  align-self: center;
+  height: 100%;
+  width: 100%;
 }
 
 @media (min-width: 756px) {
@@ -87,71 +78,47 @@ body:has(dialog[open]) {
   }
 }
 
-/* General btn styling */
-
+/* Button styling */
 .btn {
-  display: flex;
-  align-items: center;
-  max-width: max-content;
   padding: 0.9rem 1.25rem;
   border: none;
   border-radius: 0.625rem;
   background-color: var(--accent-color);
   color: var(--main-color);
   cursor: pointer;
-}
-
-.btn:hover {
-  background-color: var(--second-accent-color);
-}
-
-button {
   transition: 0.125s;
 }
-button:focus {
-  outline-offset: 0.1rem;
+
+
+
+.btn:hover
+{
+  background-color: var(--second-accent-color);
+  color: var(--main-color);
 }
 
-/* Header - Mobile First */
+
+
+/* Header */
 body > header {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
   width: 100%;
-  padding: 1rem;
   background-color: var(--secondary-color);
 }
 
-header > a {
-  grid-column: 1/2;
-  width: min-content;
+header nav {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header img {
   max-width: 45px;
 }
 
-header > a:has(img) {
-  display: flex;
-}
-
 /* Search Forms */
-#desktop_search_form {
-  display: none;
-}
-#desktop_search_form label,
-#mobile_search_form label {
-  display: flex;
-}
-
-#mobile_search_form {
-  display: flex;
-  width: 100%;
-  margin: 2rem 0;
-  background-color: var(--main-color);
-}
-
 .search_form {
+  display: flex;
   align-items: center;
   gap: 0.5rem;
   background-color: var(--main-color);
@@ -160,7 +127,7 @@ header > a:has(img) {
   padding-inline: 0.5rem;
 }
 
-.search_form label > svg {
+.search_form svg {
   fill: var(--secondary-color);
 }
 
@@ -173,12 +140,24 @@ header > a:has(img) {
 }
 
 .search_form input:focus {
-  border: none;
   outline: none;
 }
 
 .search_form:has(input:focus) {
   border: 1px solid var(--second-accent-color);
+}
+
+#desktop_search_form {
+  display: none;
+  border: none;
+  background-color: var(--main-color);
+  padding-inline: 1rem;
+}
+
+#mobile_search_form {
+  display: flex;
+  width: 100%;
+  margin: 2rem 0;
 }
 
 /* Burger Menu */
@@ -193,8 +172,6 @@ header > a:has(img) {
   cursor: pointer;
   padding: 0;
   z-index: 10;
-  grid-column: 3/4;
-  justify-self: end;
 }
 
 .burger-menu span {
@@ -216,10 +193,6 @@ header > a:has(img) {
   transform: translateY(-9px) rotate(-45deg);
 }
 
-#logout_btn {
-  order: 1;
-}
-
 /* Header Buttons */
 .header-buttons {
   position: fixed;
@@ -239,50 +212,37 @@ header > a:has(img) {
   right: 0;
 }
 
-.header-buttons.active > a {
-  width: 100%;
-  padding: 0.5rem 1rem;
+.header-buttons a {
   font-size: 1.2rem;
-}
-
-#login_btn,
-#signup_btn {
-  border: none;
-  text-decoration: none;
-  border-radius: 10rem;
-  align-self: center;
-}
-
-#profile_btn svg {
-  display: none;
-}
-
-#desktop_search_form {
-  border: none;
-  background-color: var(--main-color);
-  padding-inline: 1rem;
-
-  svg {
-    color: var(--secondary-color);
-  }
-}
-
-.header-buttons > a,
-.header-buttons > a svg {
   color: var(--main-color);
   transition: 0.125s;
+  padding: 1rem 1rem;
 }
-.header-buttons > a:hover {
-  color: var(--faded-white);
+
+.header-buttons a.active_page {
+  color: var(--second-accent-color);
 }
-.header-buttons > a svg {
+
+.header-buttons a svg {
   fill: var(--main-color);
 }
-.header-buttons > a:hover svg {
+
+.header-buttons a:hover svg {
   fill: var(--faded-white);
 }
 
-/* Overlay */
+#profile_btn svg{
+  display: none;
+}
+
+/* Auth container */
+.auth_container {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Menu overlay */
 .menu-overlay {
   display: none;
   position: fixed;
@@ -306,13 +266,6 @@ body > footer {
   margin-top: auto;
   background-color: var(--secondary-color);
   padding: 1rem;
-}
-
-footer img.logo {
-  max-width: 50px;
-}
-
-footer p {
   color: var(--main-color);
 }
 
@@ -326,22 +279,11 @@ footer .some_icons img {
   aspect-ratio: 1;
 }
 
-@media (min-width: 576px) {
-  footer .some_icons img {
-    max-width: 32px;
-  }
-}
-@media (min-width: 756px) {
-  footer .some_icons img {
-    max-width: 35px;
-  }
-  #login_btn,
-  #signup_btn {
-    color: var(--main-color);
-  }
+footer a img{
+  max-width: 45px;
 }
 
-/* Homepage specific styles */
+/* Homepage specific */
 body#home_page > header {
   position: absolute;
   top: 0;
@@ -351,50 +293,31 @@ body#home_page > header {
   background-color: transparent;
 }
 
-body#home_page header #desktop_search_form {
+body#home_page #desktop_search_form {
   border-radius: 0;
   padding-inline: 0;
   border-bottom: 1px solid var(--main-color);
+  background-color: transparent;
 }
 
-body#home_page header #desktop_search_form:has(input:focus) {
+body#home_page #desktop_search_form:has(input:focus) {
   outline: 1px solid var(--accent-color);
   outline-offset: 0.2rem;
   border-radius: 0.125rem;
 }
 
-body#home_page header #desktop_search_form label > svg {
+body#home_page #desktop_search_form svg {
   fill: var(--main-color);
 }
 
-body#home_page header #desktop_search_form input {
+body#home_page #desktop_search_form input {
   color: var(--main-color);
 }
 
 /* Desktop styles */
 @media (min-width: 756px) {
-  body > header {
-    grid-template-columns: 1fr 1fr 1fr;
-    padding: 1.5rem 2rem;
-  }
-
-  body#home_page header #desktop_search_form input,
-  body#home_page header #desktop_search_form {
-    background-color: transparent;
-  }
-
-  #desktop_search_form {
-    display: flex;
-    grid-column: 2/3;
-    justify-self: center;
-  }
-
-  #mobile_search_form {
-    display: none;
-  }
-
-  .burger-menu {
-    display: none;
+  body > header > nav {
+    padding: 2rem;
   }
 
   .header-buttons {
@@ -402,17 +325,32 @@ body#home_page header #desktop_search_form input {
     height: auto;
     width: auto;
     background-color: transparent;
-    grid-column: 3/4;
-    justify-self: end;
     padding: 0;
     flex-direction: row;
-    gap: 0.5rem;
+    gap: 1rem;
+    align-items: center;
   }
 
   .header-buttons > a {
-    font-size: 1rem;
+    font-size: 1.1rem;
     padding: initial;
-    align-self: center;
+  }
+
+  .auth_container {
+    display: flex;
+    flex-direction: row;
+    margin-left: 2rem;
+    gap: 1rem;
+    width: fit-content;
+    align-items: center;
+  }
+
+  #mobile_search_form {
+    display: none;
+  }
+
+  #desktop_search_form {
+    display: flex;
   }
 
   #profile_btn svg {
@@ -423,41 +361,43 @@ body#home_page header #desktop_search_form input {
     display: none;
   }
 
-  #logout_btn,
-  #dashboard_btn {
-    margin-right: 1rem;
-  }
-
-  header .search_form input {
-    font-size: 1rem;
-  }
-
-  #logout_btn {
-    order: 0;
+  .burger-menu {
+    display: none;
   }
 
   #home_btn {
     display: none;
   }
-  #login_btn,
-  #signup_btn {
-    background-color: var(--accent-color);
-    padding: 0.6rem 1.4rem;
+
+  footer .some_icons img {
+    max-width: 35px;
   }
-  #login_btn:hover,
-  #signup_btn:hover {
-    background-color: var(--second-accent-color);
-  }
-  #desktop_search_field::placeholder{
-    color: var(--main-color);
-  }
+#login_btn,
+#signup_btn, #logout_btn{
+  font-size: 1rem;
+  padding: 0.9rem 1.25rem;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 0.625rem;
+  color: var(--main-color);
+  cursor: pointer;
+  transition: 0.125s;
+}
+#login_btn:hover,
+#signup_btn:hover, #logout_btn:hover
+{
+  background-color: var(--second-accent-color);
+  color: var(--main-color);
+}
+
+.header-buttons #profile_btn{
+  padding: 0;
+}
 }
 
 /* Back navigation */
 .back-navigation {
   padding: 1rem 0;
-  max-width: var(--max-width);
-  margin: 0 auto;
   width: 100%;
 }
 
@@ -467,7 +407,6 @@ body#home_page header #desktop_search_form input {
   gap: 0.25rem;
   border: none;
   background: none;
-  color: var(--text-color);
   cursor: pointer;
   transition: transform 0.2s ease;
 }
