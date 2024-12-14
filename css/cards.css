@@ -147,6 +147,8 @@ body main#discover {
     color: var(--second-accent-color);
   } 
   
+ 
+
   /* Responsive Design */
     @media (max-width: 1080px) {
         body main#discover {

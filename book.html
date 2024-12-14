@@ -6,13 +6,16 @@
     <title></title>
     <script src="js/common.js" defer></script>
     <script type="module" src="js/book.js"></script>
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/book.css" />
+    <link rel="preload" href="/css/book.css" as="style">
+    <link rel="preload" href="/css/main.css" as="style">
+
+    <link rel="stylesheet" href="/css/book.css">
+    <link rel="stylesheet" href="/css/main.css">
   </head>
   <body id="book_page">
     <header>
       <nav>
-        <a href="index.html"><img src="img/logo.webp" alt="ebook logo" /></a>
+        <a href="index.html"><img src="img/logo.webp" alt="ebook logo"  /></a>
         <form id="desktop_search_form" class="search_form">
           <label for="desktop_search_field">
             <svg
@@ -182,18 +185,18 @@
 
     <footer>
       <a href="index.html"
-        ><img src="img/logo.webp" alt="ebook logo" class="logo"
+        ><img src="img/logo.webp" alt="ebook logo" class="logo" loading="lazy"
       /></a>
       <p>&#169; eBooks</p>
       <div class="some_icons">
         <a href="https://www.facebook.com" target="_blank">
-          <img src="img/facebook.png" alt="facebook logo" />
+          <img src="img/facebook.png" alt="facebook logo" loading="lazy" />
         </a>
         <a href="https://www.instagram.com" target="_blank">
-          <img src="img/instagram.png" alt="instagram logo" />
+          <img src="img/instagram.png" alt="instagram logo" loading="lazy"/>
         </a>
         <a href="https://www.youtube.com" target="_blank">
-          <img src="img/youtube.png" alt="youtube logo" />
+          <img src="img/youtube.png" alt="youtube logo" loading="lazy"/>
         </a>
       </div>
     </footer>

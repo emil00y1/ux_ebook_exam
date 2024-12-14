@@ -58,7 +58,7 @@ async function fetchBook() {
     coverImg.src =
       book.cover && book.cover.trim() !== ""
         ? book.cover
-        : "img/placeholder.jpg";
+        : "img/placeholder.webp";
     coverImg.alt = `Book cover for ${book.title}`;
   } catch (error) {
     console.log(error);
@@ -155,7 +155,7 @@ function createBookCard(book) {
 
   // Update the elements with book data
   cardLink.href = `book.html?id=${book.book_id}`;
-  coverImage.src = book.cover || "img/placeholder.jpg";
+  coverImage.src = book.cover || "img/placeholder.webp";
   coverImage.alt = `Cover of ${book.title}`;
   titleElement.textContent = book.title;
   authorElement.textContent = book.author;

@@ -285,12 +285,14 @@ footer .some_icons {
 }
 
 footer .some_icons img {
-  max-width: 28px;
+  width: 28;
+  height: auto;
   aspect-ratio: 1;
 }
 
-footer a img{
-  max-width: 45px;
+footer>a>img{
+  width: 45px;
+  aspect-ratio: 1;
 }
 
 /* Homepage specific */
