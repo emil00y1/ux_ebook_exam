@@ -53,7 +53,7 @@ body main#discover {
     overflow: hidden;
     background-color: var(--main-color);
     color: var(--secondary-color);
-    box-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.3rem 0.4rem var(--light-shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     margin-top: 1rem;
@@ -61,7 +61,7 @@ body main#discover {
   
   .card:hover {
     transform: translateY(-0.4rem);
-    box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.5rem 0.8rem var(--light-shadow);
   }
   
   .card a {
@@ -114,7 +114,7 @@ body main#discover {
     overflow: hidden;
     background-color: var(--main-color);
     color: var(--secondary-color);
-    box-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.3rem 0.4rem var(--light-shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     margin-top: 1rem;
