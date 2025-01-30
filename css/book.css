@@ -45,7 +45,7 @@ button#loan_book {
 /* DIALOG - LOAN BOOK */
 
 dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--back-ground);
 }
 
 dialog.loan_error {
@@ -55,9 +55,9 @@ dialog.loan_error {
   width: max-content;
 
   /* Styling */
-  background: white;
+  background: var(--main-color);
   border-radius: 0.75rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  box-shadow: 0 4px 6px -1px var(--back-ground-trans), 0 2px 4px -2px var(--back-ground-trans);
 
   /* Center the dialog */
   position: fixed;
@@ -88,7 +88,7 @@ dialog.loan_error {
   border: none;
   background: transparent;
   border-radius: 50%;
-  color: #6b7280;
+  color: var(--accent-grey);
   cursor: pointer;
 
   /* Center the SVG */
@@ -101,8 +101,8 @@ dialog.loan_error {
 }
 
 .close-button:hover {
-  background-color: #f3f4f6;
-  color: #1f2937;
+  background-color: var(--main-color);
+  color: var(--main-grey);
 }
 
 .close-button:focus-visible {
@@ -183,10 +183,10 @@ button#loan_book.adm_acc {
   width: 80%;
   max-width: 200px;
   scroll-snap-align: start;
-  background: white;
+  background: var(--stand-out-white);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--back-ground-trans);
   transition: transform 0.2s ease;
 }
 

@@ -22,7 +22,7 @@ main form {
     flex-direction: column;
     gap: 0.2rem;
     input {
-      border: 1px solid black;
+      border: 1px solid var(--secondary-color);
       border-radius: 0.5rem;
       font-size: 1rem;
       padding: 0.5rem;

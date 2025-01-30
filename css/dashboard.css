@@ -61,7 +61,7 @@ ul li.loan_entry:not(:last-child) {
 /* DIALOG - LOAN HISTORY */
 
 dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--back-ground);
 }
 
 dialog.loan_history {
@@ -72,7 +72,7 @@ dialog.loan_history {
   max-width: 300px;
 
   /* Styling */
-  background: white;
+  background: var(--stand-out-white);
   border-radius: 0.75rem;
   /* Center the dialog */
   position: fixed;
@@ -108,7 +108,7 @@ dialog.loan_history {
   border: none;
   background: transparent;
   border-radius: 50%;
-  color: #6b7280;
+  color: var(--accent-grey);
   cursor: pointer;
 
   /* Center the SVG */
@@ -121,8 +121,8 @@ dialog.loan_history {
 }
 
 .close-button:hover {
-  background-color: #f3f4f6;
-  color: #1f2937;
+  background-color: var(--main-color);
+  color: var(--main-grey);
 }
 
 .close-button:focus-visible {

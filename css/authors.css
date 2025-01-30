@@ -2,7 +2,7 @@
     background-color: var(--secondary-color);
     color: var(--main-color);
     border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--back-ground-trans);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
 }

@@ -19,12 +19,16 @@
   --second-accent-color: #1c98eb;
   --main-color: #f1f1f1;
   --faded-white: #caced1;
+  --stand-out-white: #fff;
   --main-grey: #333333;
+  --accent-grey: #6b7280;
   --light-grey: #e9e9e9;
   --approved: #22c55e;
   --error: #de3c3c;
   --error-hover: #f05151;
   --light-shadow: #c2c2c2;
+  --back-ground: rgba(0, 0, 0, 0.5);
+  --back-ground-trans: rgba(0, 0, 0, 0.1);
 }
 
 /* General styling */
@@ -260,7 +264,7 @@ header img {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--back-ground);
   z-index: 4;
 }
 
