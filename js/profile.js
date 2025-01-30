@@ -5,6 +5,8 @@ import {
   validatePhone,
 } from "./validators.js";
 
+import { API_BASE_URL } from "./config.js";
+
 window.addEventListener("load", fetchUser);
 const userId = sessionStorage.getItem("userId");
 
@@ -14,7 +16,7 @@ async function fetchUser() {
   }
 
   try {
-    const response = await fetch(`http://localhost:8080/users/${userId}`);
+    const response = await fetch(`${API_BASE_URL}/users/${userId}`);
 
     if (!response.ok) {
       throw new Error(`API Error: Problem fetching user from the api`);
@@ -80,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (target.dataset.action === "confirm") {
       try {
-        const response = await fetch(`http://localhost:8080/users/${userId}`, {
+        const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
           method: "DELETE",
         });
 
@@ -143,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (isValid) {
       try {
-        const response = await fetch(`http://localhost:8080/users/${userId}`, {
+        const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
           method: "PUT",
           body: formData,
         });

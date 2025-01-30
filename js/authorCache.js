@@ -1,4 +1,4 @@
-// authorCache.js
+import { API_BASE_URL } from "./config.js";
 
 // Create a class to manage our author cache with methods to handle updates
 class AuthorCache {
@@ -9,7 +9,7 @@ class AuthorCache {
   // Initialize or refresh the cache with new author data
   async initialize() {
     try {
-      const response = await fetch("http://localhost:8080/authors");
+      const response = await fetch(`${API_BASE_URL}/authors`);
       const authors = await response.json();
 
       // Create a map for O(1) lookups using author name as key

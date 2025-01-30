@@ -1,6 +1,8 @@
+import { API_BASE_URL } from "./config.js";
+
 async function fetchBooks() {
   try {
-    const response = await fetch("http://127.0.0.1:8080/books?n=15");
+    const response = await fetch(`${API_BASE_URL}/books?n=15`);
     if (!response.ok) throw new Error("Failed to fetch books");
     return response.json();
   } catch (error) {
@@ -35,7 +37,7 @@ document.addEventListener("DOMContentLoaded", renderBooks);
 
 async function fetchAuthors() {
   try {
-    const response = await fetch("http://127.0.0.1:8080/authors");
+    const response = await fetch(`${API_BASE_URL}/authors`);
     if (!response.ok) throw new Error("Failed to fetch authors");
     const data = await response.json();
 

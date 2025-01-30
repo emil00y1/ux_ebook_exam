@@ -1,4 +1,6 @@
 import { initializeBackButton } from "./backButton.js";
+import { API_BASE_URL } from "./config.js";
+
 
 document.addEventListener("DOMContentLoaded", async () => {
   initializeBackButton();
@@ -7,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function fetchAuthorBooks(authorId) {
   try {
-    const response = await fetch(`http://127.0.0.1:8080/books?a=${authorId}`);
+    const response = await fetch(`${API_BASE_URL}/books?a=${authorId}`);
     if (!response.ok) throw new Error("Failed to fetch books");
     return await response.json();
   } catch (error) {

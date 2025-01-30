@@ -1,5 +1,6 @@
 import { authorCache } from "./authorCache.js";
 import { initializeBackButton } from "./backButton.js";
+import { API_BASE_URL } from "./config.js";
 window.addEventListener("load", fetchBook);
 window.addEventListener("load", fetchRecommendedBooks);
 
@@ -29,7 +30,7 @@ async function fetchBook() {
   }
 
   try {
-    const response = await fetch(`http://localhost:8080/books/${bookId}`);
+    const response = await fetch(`${API_BASE_URL}/books/${bookId}`);
     if (!response.ok) {
       throw new Error(`API Error: Problem fetching data from the api`);
     }
@@ -75,7 +76,7 @@ async function loanBook() {
     return; // Exit the function early
   }
 
-  const apiEndpoint = `http://localhost:8080/users/${userId}/books/${bookId}`;
+  const apiEndpoint = `${API_BASE_URL}/users/${userId}/books/${bookId}`;
   const dialog = document.querySelector("dialog");
   const closeButton = document.querySelector("dialog button");
   const bookTitle = document.querySelector("h1").textContent;
@@ -125,7 +126,7 @@ async function loanBook() {
 // Fetch and display recommended books
 async function fetchRecommendedBooks() {
   try {
-    const response = await fetch("http://localhost:8080/books?n=5");
+    const response = await fetch(`${API_BASE_URL}/books?n=5`);
     if (!response.ok) {
       throw new Error("Failed to fetch recommendations");
     }
@@ -149,14 +150,11 @@ function createBookCard(book) {
   const card = template.content.cloneNode(true);
 
   const cardLink = card.querySelector("a");
-  const coverImage = card.querySelector("img");
   const titleElement = card.querySelector("h3");
   const authorElement = card.querySelector(".author");
 
   // Update the elements with book data
   cardLink.href = `book.html?id=${book.book_id}`;
-  coverImage.src = book.cover || "img/placeholder.webp";
-  coverImage.alt = `Cover of ${book.title}`;
   titleElement.textContent = book.title;
   authorElement.textContent = book.author;
 

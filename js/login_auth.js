@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./config.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
   form.addEventListener("submit", handleLoginSubmit);
@@ -34,7 +36,7 @@ function handleLoginSubmit(event) {
     const formData = new FormData(document.getElementById("loginForm"));
 
     // Perform the login using fetch (AJAX request)
-    fetch("http://localhost:8080/users/login", {
+    fetch(`${API_BASE_URL}/users/login`, {
       method: "POST",
       body: formData, // Send as URL-encoded string
     })

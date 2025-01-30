@@ -1,4 +1,6 @@
 import { initializeBackButton } from "./backButton.js";
+import { API_BASE_URL } from "./config.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   initializeBackButton();
   fetchResults();
@@ -16,7 +18,7 @@ async function fetchResults() {
     return;
   }
 
-  const apiEndpoint = `http://localhost:8080/books?s=${searchQuery}`;
+  const apiEndpoint = `${API_BASE_URL}/books?s=${searchQuery}`;
 
   try {
     const response = await fetch(apiEndpoint);

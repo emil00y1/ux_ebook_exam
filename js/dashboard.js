@@ -1,4 +1,5 @@
 import { authorCache } from "./authorCache.js";
+import { API_BASE_URL } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#book_details").addEventListener("submit", loadBook);
@@ -42,7 +43,7 @@ async function loadBook(event) {
     return;
   }
 
-  const apiEndpoint = `http://localhost:8080/admin/books/${bookId}`;
+  const apiEndpoint = `${API_BASE_URL}/admin/books/${bookId}`;
 
   try {
     const response = await fetch(apiEndpoint);
@@ -192,7 +193,7 @@ async function addBook(event) {
 
   const formData = new FormData(form);
   try {
-    const response = await fetch("http://localhost:8080/admin/books", {
+    const response = await fetch(`${API_BASE_URL}/admin/books`, {
       method: "POST",
       body: formData,
     });
@@ -223,7 +224,7 @@ async function addAuthor(event) {
   const formData = new FormData(event.target);
 
   try {
-    const response = await fetch("http://localhost:8080/admin/authors", {
+    const response = await fetch(`${API_BASE_URL}/admin/authors`, {
       method: "POST",
       body: formData,
     });
@@ -288,7 +289,7 @@ async function addPublisher(event) {
 
   const formData = new FormData(form);
   try {
-    const response = await fetch("http://localhost:8080/admin/publishers", {
+    const response = await fetch(`${API_BASE_URL}/admin/publishers`, {
       method: "POST",
       body: formData,
     });

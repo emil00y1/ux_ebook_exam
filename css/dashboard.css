@@ -52,9 +52,11 @@ section.book_details_container {
   }
 }
 
-.loan_entry:not(:last-child) {
+
+ul li.loan_entry:not(:last-child) {
   margin-bottom: 1rem;
 }
+
 
 /* DIALOG - LOAN HISTORY */
 

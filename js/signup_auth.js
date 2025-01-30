@@ -1,4 +1,5 @@
 import { validateForm } from "./validators.js";
+import { API_BASE_URL } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("signupForm");
@@ -20,6 +21,7 @@ function handleFormSubmit(event) {
     repeatPassword: document.getElementById("repeat-password"),
     address: document.getElementById("address"),
     phone: document.getElementById("phone_number"),
+    birthDate: document.getElementById("birth_date"), 
   };
 
   // Check if all elements were found
@@ -39,7 +41,16 @@ function handleFormSubmit(event) {
     repeatPassword: formElements.repeatPassword.value,
     address: formElements.address.value,
     phone: formElements.phone.value,
+    birthDate: formElements.birthDate.value, 
   };
+
+  // Validate birth date (cannot be in the future)
+  const today = new Date().toISOString().split("T")[0];
+  if (formData.birthDate > today) {
+    document.getElementById("birth_date-error").textContent =
+      "Birthdate cannot be in the future.";
+    return;
+  }
 
   // Validate form using imported validator
   const { isValid, errors } = validateForm(formData);
@@ -75,7 +86,7 @@ function handleFormSubmit(event) {
   // If validation passes, submit the form
   const formDataToSend = new FormData(event.target);
 
-  fetch("http://localhost:8080/users", {
+  fetch(`${API_BASE_URL}/users`, {
     method: "POST",
     body: formDataToSend,
   })
