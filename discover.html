@@ -152,26 +152,24 @@
   </body>
   <template id="book-card-template">
     <article class="card">
-      <a href="">
-        <div class="card-header"></div>
-        <div class="card-content">
-          <h3></h3>
-          <p class="author"></p>
-          <p class="published-year"></p>
-        </div>
-        <div class="card-footer">
-          <p>More info</p>
-        </div>
-      </a>
+      <div class="card-header"></div>
+      <div class="card-content">
+        <h3><a href=""></a></h3> <!-- Move <a> inside h3 -->
+        <p class="author"></p>
+        <p class="published-year"></p>
+      </div>
+      <div class="card-footer">
+        <a href="">More info</a> <!-- Make link inline inside footer -->
+      </div>
     </article>
   </template>
+  
   <template id="author-card-template">
     <article class="card">
-      <a href="">
-        <div class="card-content">
-          <h3 class="author-name"></h3>
-        </div>
-      </a>
+      <div class="card-content">
+        <h3><a href="" class="author-name"></a></h3> 
+      </div>
     </article>
   </template>
+  
 </html>
