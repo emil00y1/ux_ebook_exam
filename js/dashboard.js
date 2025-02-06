@@ -104,94 +104,128 @@ async function loadBook(event) {
   }
 }
 
+async function getUserName(userId) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/users/${userId}`);
+
+    if (!response.ok) throw new Error("User not found");
+    
+    const user = await response.json();
+    
+    // Combine first and last name (handle missing values)
+    const fullName = [user.first_name, user.last_name].filter(Boolean).join(" ");
+    
+    return fullName || `User ${userId}`;
+  } catch (error) {
+    console.error(`Error fetching user ${userId}:`, error);
+    return `User ${userId}`;
+  }
+}
+
 async function showLoanHistory(bookLoans) {
   const dialog = document.querySelector("dialog");
-  const closeButton = document.querySelector("dialog button");
-
-  // Clear previous loan entries
-  const existingLoans = dialog.querySelectorAll(".loan_entry");
-  existingLoans.forEach((entry) => entry.remove());
-
-  closeButton.addEventListener("click", () => {
-    dialog.close();
-  });
-
-  if (!Array.isArray(bookLoans) || bookLoans.length === 0) {
-    document.querySelector(".dialog-content .error").textContent =
-      "This book has no loan history";
-    dialog.showModal();
-    return;
-  }
-
   const dialogContent = dialog.querySelector(".dialog-content");
 
-  bookLoans.forEach((loan) => {
-    const template = document
-      .getElementById("book_loan_template")
-      .content.cloneNode(true);
+  dialogContent.innerHTML = ""; // Clear previous content
 
-    template.querySelector("h4").textContent = `User ID: ${loan.user_id}`;
-    template.querySelector("p").textContent = `Loan Date: ${loan.loan_date}`;
+  // Map each loan to a Promise that fetches user name
+  const loanElements = await Promise.all(
+    bookLoans.map(async (loan) => {
+      const template = document.getElementById("book_loan_template").content.cloneNode(true);
+      const userName = await getUserName(loan.user_id);
 
-    dialogContent.appendChild(template);
-  });
+      template.querySelector("h4").textContent = `User: ${userName}`;
+      template.querySelector("p").textContent = `Loan Date: ${loan.loan_date}`;
+      
+      return template;
+    })
+  );
+
+  // Append all resolved elements
+  loanElements.forEach(template => dialogContent.appendChild(template));
 
   dialog.showModal();
+}
+
+// Store the fetched data
+let authors = [];
+let publishers = [];
+
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    // Fetch data
+    const [authorsResponse, publishersResponse] = await Promise.all([
+      fetch(`${API_BASE_URL}/authors`),
+      fetch(`${API_BASE_URL}/publishers`)
+    ]);
+
+    if (authorsResponse.ok) {
+      authors = await authorsResponse.json();
+      populateDatalist('author_dropdown', authors, 'author_name');
+    }
+    
+    if (publishersResponse.ok) {
+      publishers = await publishersResponse.json();
+      populateDatalist('publisher_dropdown', publishers, 'publisher_name');
+    }
+
+    // Add input event listeners
+    document.querySelector("#author_search").addEventListener("input", (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = authors.filter(author => 
+        author.author_name.toLowerCase().includes(query)
+      );
+      populateDatalist('author_dropdown', filtered, 'author_name');
+    });
+
+    document.querySelector("#publisher_search").addEventListener("input", (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = publishers.filter(publisher => 
+        publisher.publisher_name.toLowerCase().includes(query)
+      );
+      populateDatalist('publisher_dropdown', filtered, 'publisher_name');
+    });
+
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+});
+
+function populateDatalist(datalistId, items, nameField) {
+  const datalist = document.querySelector(`#${datalistId}`);
+  datalist.innerHTML = "";
+  items.forEach(item => {
+    const option = document.createElement("option");
+    option.value = item[nameField];
+    datalist.appendChild(option);
+  });
 }
 
 async function addBook(event) {
   event.preventDefault();
   const form = event.target;
   const statusElement = form.querySelector(".status");
-  const inputs = form.querySelectorAll("input[required]");
-  const yearInput = form.querySelector("#add_year");
-  const yearValue = yearInput.value.trim();
-  const currentYear = new Date().getFullYear();
-  let hasErrors = false;
 
-  // Clear any previous error states
-  form.querySelectorAll(".error").forEach((error) => {
-    error.textContent = "";
-    error.classList.add("hidden");
-  });
-  form.querySelectorAll("input").forEach((input) => {
-    input.classList.remove("error-input");
-  });
+  // Get the entered values
+  const authorName = form.querySelector("#author_search").value;
+  const publisherName = form.querySelector("#publisher_search").value;
 
-  // Validate each required field
-  inputs.forEach((input) => {
-    if (!input.value.trim()) {
-      const errorSpan = input.parentElement.querySelector(".error");
-      errorSpan.textContent = "Required field";
-      errorSpan.classList.remove("hidden");
-      input.classList.add("error-input");
-      hasErrors = true;
-    }
-  });
+  // Find the corresponding IDs
+  const author = authors.find(a => a.author_name === authorName);
+  const publisher = publishers.find(p => p.publisher_name === publisherName);
 
-  if (yearValue) {
-    // Only validate if there's a value (empty is handled by required validation)
-    const yearAsNumber = parseInt(yearValue);
-    if (yearAsNumber > currentYear) {
-      // Find the error span within the same parent div as the year input
-      const yearError = yearInput.parentElement.querySelector(".error");
-      yearError.textContent = `Publishing year cannot be higher than ${currentYear}`;
-      yearError.classList.remove("hidden");
-      yearInput.classList.add("error-input");
-      hasErrors = true;
-    } else if (isNaN(yearAsNumber)) {
-      // Also check if the year is actually a number
-      const yearError = yearInput.parentElement.querySelector(".error");
-      yearError.textContent = "Please enter a valid year";
-      yearError.classList.remove("hidden");
-      yearInput.classList.add("error-input");
-      hasErrors = true;
-    }
+  if (!author || !publisher) {
+    statusElement.textContent = "Please select valid author and publisher from the dropdowns";
+    statusElement.classList.remove("success", "hidden");
+    statusElement.classList.add("error");
+    return;
   }
 
-  if (hasErrors) return;
-
+  // Create FormData
   const formData = new FormData(form);
+  formData.set('author_id', author.author_id);
+  formData.set('publisher_id', publisher.publisher_id);
+
   try {
     const response = await fetch(`${API_BASE_URL}/admin/books`, {
       method: "POST",
@@ -199,15 +233,11 @@ async function addBook(event) {
     });
 
     if (!response.ok) {
-      statusElement.textContent = "Failed to add book. Try again.";
-      statusElement.classList.remove("success", "hidden");
-      statusElement.classList.add("error");
       throw new Error("Failed to add book");
     }
 
     form.reset();
-    statusElement.textContent =
-      "The book was successfully added to the system.";
+    statusElement.textContent = "The book was successfully added to the system.";
     statusElement.classList.remove("error", "hidden");
     statusElement.classList.add("success");
   } catch (error) {

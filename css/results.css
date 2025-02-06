@@ -54,6 +54,11 @@ article.card > a:hover * {
   color: var(--second-accent-color);
 }
 
+.book-card-link {
+  display: block;
+}
+
+
 @media (min-width: 756px) {
   section#results {
     display: grid;

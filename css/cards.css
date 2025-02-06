@@ -147,7 +147,9 @@ body main#discover {
     color: var(--second-accent-color);
   } 
   
- 
+ .card-link {
+    display: block;
+  }
 
   /* Responsive Design */
     @media (max-width: 1080px) {

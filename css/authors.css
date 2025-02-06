@@ -7,7 +7,7 @@
     overflow: hidden;
 }
 
-.card a {
+.card {
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
@@ -16,6 +16,11 @@
     height: 100%;
     width: 100%;
     gap: 0.5rem;
+}
+
+.card a {
+    text-decoration: none;
+    color: var(--second-accent-color);
 }
 
 .card:hover {

@@ -170,24 +170,23 @@
                 <span class="error hidden"></span>
               </div>
               <div>
-                <label for="add_author_id">Author ID</label>
-                <input
-                  type="text"
-                  id="add_author_id"
-                  name="author_id"
-                  required
-                >
-                <span class="error hidden"></span>
-              </div>
-              <div>
-                <label for="add_publisher_id">Publisher ID</label>
-                <input
-                  type="text"
-                  id="add_publisher_id"
-                  name="publisher_id"
-                  required
-                >
-                <span class="error hidden"></span>
+                <div class="search-container">
+                  <label for="author_search">Search Author:</label>
+                  <input type="text" id="author_search" list="author_dropdown" placeholder="Search authors..." autocomplete="off"/>
+                  <span class="error hidden"></span>
+                  <datalist id="author_dropdown">
+                    <!-- Dynamically populated options will go here -->
+                  </datalist>
+                </div>
+                
+                <div class="search-container">
+                  <label for="publisher_search">Search Publisher:</label>
+                  <input type="text" id="publisher_search" list="publisher_dropdown" placeholder="Search publishers..." autocomplete="off" />
+                  <span class="error hidden"></span>
+                  <datalist id="publisher_dropdown">
+                    <!-- Dynamically populated options will go here -->
+                  </datalist>
+                </div>
               </div>
               <div>
                 <label for="add_year">Publishing Year</label>

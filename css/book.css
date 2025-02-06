@@ -242,6 +242,12 @@ button#loan_book.adm_acc {
         color: var(--main-grey);
       }
 
+.card-link {
+        display: block;  
+        text-decoration: none;  
+      }
+      
+
 /* Responsive Design */
 @media (min-width: 640px) {
   .recommendation-card {

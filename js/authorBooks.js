@@ -22,7 +22,8 @@ function renderBookCard(book) {
   const template = document
     .getElementById("book-card-template")
     .content.cloneNode(true);
-  template.querySelector("a").href = `book.html?id=${book.book_id}`;
+    template.querySelector("h3 a").href = `book.html?id=${book.book_id}`;
+    template.querySelector(".card-footer a").href = `book.html?id=${book.book_id}`;
   template.querySelector(".card-header").textContent = book.publishing_company;
   template.querySelector("h3").textContent = book.title;
   template.querySelector(".published-year")
