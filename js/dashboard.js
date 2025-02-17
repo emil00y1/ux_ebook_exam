@@ -3,6 +3,7 @@ import { API_BASE_URL } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#book_details").addEventListener("submit", loadBook);
+  document.querySelector("#book_name").addEventListener("input", searchBooks);
   document.querySelector("#add_book").addEventListener("submit", addBook);
   document.querySelector("#add_author").addEventListener("submit", addAuthor);
   document
@@ -21,128 +22,230 @@ if (!userEmail) {
   window.location.href = "index.html";
 }
 
+async function searchBooks(event) {
+  const bookNameInput = event.target;
+  const bookName = bookNameInput.value.trim();
+
+  if (!bookName) {
+    return;
+  }
+
+  const apiEndpoint = `${API_BASE_URL}/books?s=${encodeURIComponent(bookName)}`;
+
+  try {
+    const response = await fetch(apiEndpoint);
+
+    if (!response.ok) {
+      throw new Error(`API Error: Problem fetching data from the api`);
+    }
+
+    const books = await response.json();
+
+    if (books.length === 0) {
+      throw new Error("No books found with the given name");
+    }
+
+    // Populate the datalist with matching books
+    const datalist = document.querySelector("#book_dropdown");
+    datalist.innerHTML = "";
+    books.forEach((book) => {
+      const option = document.createElement("option");
+      option.value = book.title;
+      option.dataset.bookId = book.book_id;
+      datalist.appendChild(option);
+    });
+
+    // Add event listener to handle book selection
+    bookNameInput.addEventListener("change", async () => {
+      const selectedBook = books.find(
+        (book) => book.title === bookNameInput.value
+      );
+      if (selectedBook) {
+        await displayBookDetails(selectedBook);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    document.querySelector("#content .error").textContent =
+      "Could not load the book. Check if the name is correct and try again.";
+  }
+}
+
 async function loadBook(event) {
   event.preventDefault();
   const form = event.target;
-  const bookIdInput = form.querySelector("#book_id");
-  const bookId = bookIdInput.value.trim();
-  const errorSpan = bookIdInput.parentElement.querySelector(".error");
+  const bookNameInput = form.querySelector("#book_name");
+  const bookName = bookNameInput.value.trim();
+  const errorSpan = bookNameInput.parentElement.querySelector(".error");
 
   // First clear any previous error states
   form.querySelectorAll(".error").forEach((error) => {
     error.textContent = "";
     error.classList.add("hidden");
   });
-  bookIdInput.classList.remove("error-input");
+  bookNameInput.classList.remove("error-input");
 
-  // Validate the book ID field
-  if (!bookId) {
+  // Validate the book name field
+  if (!bookName) {
     errorSpan.textContent = "Required field";
     errorSpan.classList.remove("hidden");
-    bookIdInput.classList.add("error-input");
+    bookNameInput.classList.add("error-input");
     return;
   }
 
-  const apiEndpoint = `${API_BASE_URL}/admin/books/${bookId}`;
+  const apiEndpoint = `${API_BASE_URL}/books?s=${encodeURIComponent(bookName)}`;
 
   try {
     const response = await fetch(apiEndpoint);
 
     if (!response.ok) {
-      // Clear the book display area
-      document.querySelector("title").textContent = "";
-      document.querySelector("h3").textContent = "";
-      document.querySelector(".author").textContent = "";
-      document.querySelector(".publisher").textContent = "";
-      document.querySelector(".year").textContent = "";
-      document.querySelector("#show_loan_history").classList.add("hidden");
-      document
-        .querySelector(".book_details_container")
-        .classList.remove("flex");
-      document.querySelector(".book_details_container").classList.add("hidden");
-      const coverImg = document.querySelector(".cover img");
-      coverImg.src = "";
-      coverImg.alt = "";
-
       throw new Error(`API Error: Problem fetching data from the api`);
     }
 
-    // Clear any previous error messages
-    document.querySelector("#content .error").textContent = "";
+    const books = await response.json();
 
-    const book = await response.json();
+    if (books.length === 0) {
+      throw new Error("No books found with the given name");
+    }
 
-    // Update the display with book information
-    document
-      .querySelector(".book_details_container")
-      .classList.remove("hidden");
-    document.querySelector(".book_details_container").classList.add("flex");
-    document.querySelector("title").textContent = book.title;
-    document.querySelector("h3").textContent = book.title;
-    document.querySelector(".author").textContent = book.author;
-    document.querySelector(".publisher").textContent = book.publishing_company;
-    document.querySelector(".year").textContent = book.publishing_year;
-    document.querySelector("#show_loan_history").classList.remove("hidden");
+    // Populate the datalist with matching books
+    const datalist = document.querySelector("#book_dropdown");
+    datalist.innerHTML = "";
+    books.forEach((book) => {
+      const option = document.createElement("option");
+      option.value = book.title;
+      option.dataset.bookId = book.book_id;
+      datalist.appendChild(option);
+    });
 
-    // Update the cover image
-    const coverImg = document.querySelector(".cover img");
-    coverImg.src =
-      book.cover && book.cover.trim() !== ""
-        ? book.cover
-        : "img/img-placeholder.webp";
-    coverImg.alt = `Book cover for ${book.title}`;
-
-    // Set up loan history
-    const bookLoans = book.loans.reverse();
-    document
-      .querySelector("#show_loan_history")
-      .addEventListener("click", () => showLoanHistory(bookLoans));
+    // Add event listener to handle book selection
+    bookNameInput.addEventListener("change", async () => {
+      const selectedBook = books.find(
+        (book) => book.title === bookNameInput.value
+      );
+      if (selectedBook) {
+        await displayBookDetails(selectedBook);
+      }
+    });
   } catch (error) {
     console.log(error);
     document.querySelector("#content .error").textContent =
-      "Could not load the book. Check if the id is correct and try again.";
+      "Could not load the book. Check if the name is correct and try again.";
   }
 }
 
-async function getUserName(userId) {
-  try {
-    const response = await fetch(`${API_BASE_URL}/users/${userId}`);
+async function displayBookDetails(book) {
+  // Update the display with book information
+  document.querySelector(".book_details_container").classList.remove("hidden");
+  document.querySelector(".book_details_container").classList.add("flex");
+  document.querySelector("title").textContent = book.title;
+  document.querySelector("h3").textContent = book.title;
+  document.querySelector(".author").textContent = book.author;
+  document.querySelector(".publisher").textContent = book.publishing_company;
+  document.querySelector(".year").textContent = book.publishing_year;
+  
+  // Store book ID for loan history
+  const loanHistoryBtn = document.querySelector("#show_loan_history");
+  loanHistoryBtn.classList.remove("hidden");
+  loanHistoryBtn.dataset.bookId = book.book_id;
 
-    if (!response.ok) throw new Error("User not found");
-    
-    const user = await response.json();
-    
-    // Combine first and last name (handle missing values)
-    const fullName = [user.first_name, user.last_name].filter(Boolean).join(" ");
-    
-    return fullName || `User ${userId}`;
-  } catch (error) {
-    console.error(`Error fetching user ${userId}:`, error);
-    return `User ${userId}`;
-  }
+  // Update the cover image
+  const coverImg = document.querySelector(".cover img");
+  coverImg.src = book.cover && book.cover.trim() !== "" 
+    ? book.cover 
+    : "img/img-placeholder.webp";
+  coverImg.alt = `Book cover for ${book.title}`;
+
+  // Remove any existing event listeners before adding a new one
+  loanHistoryBtn.replaceWith(loanHistoryBtn.cloneNode(true));
+  const newLoanHistoryBtn = document.querySelector("#show_loan_history");
+
+  // Set up loan history button click handler
+  newLoanHistoryBtn.addEventListener("click", async () => {
+    try {
+      // Fetch loan history from admin endpoint
+      console.log("Fetching loan history for book ID:", book.book_id);
+      const response = await fetch(`${API_BASE_URL}/admin/books/${book.book_id}`);
+      if (!response.ok) throw new Error('Failed to fetch loan history');
+      
+      const bookDetails = await response.json();
+      await showLoanHistory(bookDetails.loans || []);
+    } catch (error) {
+      console.error('Error fetching loan history:', error);
+      const dialog = document.querySelector("dialog.loan_history");
+      const errorElement = dialog.querySelector(".error");
+      errorElement.textContent = "Failed to load loan history. Please try again.";
+      errorElement.classList.remove("hidden");
+    }
+  });
+
+  // Add dialog close button functionality
+  const dialog = document.querySelector("dialog.loan_history");
+  const closeButton = dialog.querySelector(".close-button");
+  closeButton.addEventListener("click", () => {
+    dialog.close();
+  });
 }
 
 async function showLoanHistory(bookLoans) {
-  const dialog = document.querySelector("dialog");
+  const dialog = document.querySelector("dialog.loan_history");
   const dialogContent = dialog.querySelector(".dialog-content");
+  const errorElement = dialog.querySelector(".error");
 
-  dialogContent.innerHTML = ""; // Clear previous content
+  // Clear previous content and errors
+  dialogContent.innerHTML = "";
+  errorElement.textContent = "";
+  errorElement.classList.add("hidden");
+
+  if (!bookLoans.length) {
+    const noLoansMessage = document.createElement("p");
+    noLoansMessage.textContent = "No loan history available for this book.";
+    dialogContent.appendChild(noLoansMessage);
+    dialog.showModal();
+    return;
+  }
+
+  // Create loan history list
+  const loansList = document.createElement("ul");
+  loansList.className = "book_loans";
+
+  async function getUserName(userId) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/users/${userId}`);
+  
+      if (!response.ok) throw new Error("User not found");
+      
+      const user = await response.json();
+      
+      // Combine first and last name (handle missing values)
+      const fullName = [user.first_name, user.last_name].filter(Boolean).join(" ");
+      
+      return fullName || `User ${userId}`;
+    } catch (error) {
+      console.error(`Error fetching user ${userId}:`, error);
+      return `User ${userId}`;
+    }
+  }
 
   // Map each loan to a Promise that fetches user name
   const loanElements = await Promise.all(
-    bookLoans.map(async (loan) => {
-      const template = document.getElementById("book_loan_template").content.cloneNode(true);
+    bookLoans.reverse().map(async (loan) => {
+      const loanItem = document.createElement("li");
       const userName = await getUserName(loan.user_id);
-
-      template.querySelector("h4").textContent = `User: ${userName}`;
-      template.querySelector("p").textContent = `Loan Date: ${loan.loan_date}`;
       
-      return template;
+      loanItem.innerHTML = `
+        <h4>User: ${userName}</h4>
+        <p>Loan Date: ${loan.loan_date}</p>
+        ${loan.return_date ? `<p>Return Date: ${loan.return_date}</p>` : ''}
+      `;
+      
+      return loanItem;
     })
   );
 
   // Append all resolved elements
-  loanElements.forEach(template => dialogContent.appendChild(template));
+  loanElements.forEach(element => loansList.appendChild(element));
+  dialogContent.appendChild(loansList);
 
   dialog.showModal();
 }
