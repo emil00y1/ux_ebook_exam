@@ -57,23 +57,53 @@ article.card > a:hover * {
 .book-card-link {
   display: block;
 }
+#results {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  gap: 20px;
+}
 
+/* Ensure sections are displayed as block elements and take up full width */
+#results > section {
+  display: block;
+  width: 100%;
+  margin-bottom: 2rem; /* Add some space between sections */
+}
+
+/* Ensure the results container within each section is displayed as a grid */
+.results-container,
+.results-container-authors {
+  display: grid;
+  gap: 1.5rem;
+}
 
 @media (min-width: 756px) {
-  section#results {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-  section#results .card:not(:last-child) {
-    margin: 0;
+  .results-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1080px) {
-  section#results {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1.5rem;
+  .results-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 756px) {
+
+  section#results .card:not(:last-child) {
+    margin: 0;
+  }
+  .results-container,
+  .results-container-authors {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1080px) {
+
+  .results-container,
+  .results-container-authors {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

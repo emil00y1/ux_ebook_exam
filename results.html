@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" >
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script type="module" src="js/results.js"></script>
     <script src="js/common.js" defer></script>
-    <link rel="stylesheet" href="css/results.css" >
-    <link rel="stylesheet" href="css/main.css" >
+    <link rel="stylesheet" href="css/results.css">
+    <link rel="stylesheet" href="css/main.css">
   </head>
   <body id="results_page">
     <header>
       <nav>
-        <a href="index.html"><img src="img/logo.webp" alt="ebook logo" ></a>
+        <a href="index.html"><img src="img/logo.webp" alt="ebook logo"></a>
         <form id="desktop_search_form" class="search_form">
           <label for="desktop_search_field">
             <svg
@@ -50,8 +50,8 @@
               >
                 <path
                   d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"
-                >
-              </svg>
+              >
+            </svg>
             </label>
             <input
               type="text"
@@ -127,6 +127,7 @@
       </div>
     </footer>
   </body>
+
   <template id="book-card-template">
     <article class="card">
       <a href="" class="book-card-link">
@@ -140,6 +141,20 @@
         </div>
         <div class="card-footer">
           <p>More info</p>
+        </div>
+      </a>
+    </article>
+  </template>
+  <template id="author-card-template">
+    <article class="card author-card">
+      <a href="" class="author-card-link">
+        <div class="card-header">
+        </div>
+        <div class="card-content">
+          <h3></h3>
+        </div>
+        <div class="card-footer">
+          <p>View author</p>
         </div>
       </a>
     </article>
