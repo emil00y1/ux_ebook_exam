@@ -149,11 +149,16 @@ async function displayBookDetails(book) {
   loanHistoryBtn.classList.remove("hidden");
   loanHistoryBtn.dataset.bookId = book.book_id;
 
-  // Update the cover image
+  // Fetch the book details from the API to get the cover image
+  const response = await fetch(`${API_BASE_URL}/books/${book.book_id}`);
+  const data = await response.json();
+
+  // Update the cover image from the API response
   const coverImg = document.querySelector(".cover img");
-  coverImg.src = book.cover && book.cover.trim() !== "" 
-    ? book.cover 
-    : "img/img-placeholder.webp";
+  coverImg.src =
+    data.cover && data.cover.trim() !== "" 
+      ? data.cover 
+      : "img/placeholder.webp";
   coverImg.alt = `Book cover for ${book.title}`;
 
   // Remove any existing event listeners before adding a new one
