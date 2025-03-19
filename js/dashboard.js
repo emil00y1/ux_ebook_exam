@@ -6,9 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#book_name").addEventListener("input", searchBooks);
   document.querySelector("#add_book").addEventListener("submit", addBook);
   document.querySelector("#add_author").addEventListener("submit", addAuthor);
-  document
-    .querySelector("#add_publisher")
-    .addEventListener("submit", addPublisher);
+  document.querySelector("#add_publisher").addEventListener("submit", (event) => {
+    console.log("Publisher form submit event triggered");
+    addPublisher(event);
+  });
   setupTabs();
   // Show first tab by default
   document.querySelector(".tab-button").click();
@@ -66,8 +67,6 @@ async function searchBooks(event) {
     });
   } catch (error) {
     console.log(error);
-    document.querySelector("#content .error").textContent =
-      "Could not load the book. Check if the name is correct and try again.";
   }
 }
 
@@ -129,13 +128,14 @@ async function loadBook(event) {
     });
   } catch (error) {
     console.log(error);
-    document.querySelector("#content .error").textContent =
-      "Could not load the book. Check if the name is correct and try again.";
   }
 }
 
 async function displayBookDetails(book) {
   // Update the display with book information
+  const response = await fetch(`${API_BASE_URL}/books/${book.book_id}`);
+  const data = await response.json();
+
   document.querySelector(".book_details_container").classList.remove("hidden");
   document.querySelector(".book_details_container").classList.add("flex");
   document.querySelector("title").textContent = book.title;
@@ -148,10 +148,6 @@ async function displayBookDetails(book) {
   const loanHistoryBtn = document.querySelector("#show_loan_history");
   loanHistoryBtn.classList.remove("hidden");
   loanHistoryBtn.dataset.bookId = book.book_id;
-
-  // Fetch the book details from the API to get the cover image
-  const response = await fetch(`${API_BASE_URL}/books/${book.book_id}`);
-  const data = await response.json();
 
   // Update the cover image from the API response
   const coverImg = document.querySelector(".cover img");
@@ -348,6 +344,9 @@ async function addBook(event) {
     statusElement.textContent = "The book was successfully added to the system.";
     statusElement.classList.remove("error", "hidden");
     statusElement.classList.add("success");
+
+    // Update the book datalist
+    await searchBooks({ target: document.querySelector("#book_name") });
   } catch (error) {
     console.error("Error adding book:", error);
     statusElement.textContent = "Failed to add book. Try again.";
@@ -356,12 +355,35 @@ async function addBook(event) {
   }
 }
 
+// Update the addAuthor function to ensure the datalist is properly refreshed
 async function addAuthor(event) {
   event.preventDefault();
-  const statusElement = event.target.querySelector(".status");
-  const formData = new FormData(event.target);
-
+  const form = event.target;
+  const statusElement = form.querySelector(".status");
+  
+  // Get the author name directly from the input fields - using the correct IDs from your HTML
+  const firstNameInput = form.querySelector("#add_first_name");
+  const lastNameInput = form.querySelector("#add_last_name");
+  
+  if (!firstNameInput || !lastNameInput) {
+    console.error("Author name input fields not found!");
+    statusElement.textContent = "Form error: Author name fields not found";
+    statusElement.classList.remove("success", "hidden");
+    statusElement.classList.add("error");
+    return;
+  }
+  
+  const firstName = firstNameInput.value.trim();
+  const lastName = lastNameInput.value.trim();
+  const authorName = `${firstName} ${lastName}`;
+  
+  // Create the FormData for the API request
+  const formData = new FormData(form);
+  
   try {
+    // Log the form data for debugging
+    console.log("Submitting author with name:", authorName);
+    
     const response = await fetch(`${API_BASE_URL}/admin/authors`, {
       method: "POST",
       body: formData,
@@ -371,31 +393,47 @@ async function addAuthor(event) {
 
     if (!response.ok) {
       statusElement.textContent = "Failed to add author. Try again.";
-      statusElement.classList.remove("success");
+      statusElement.classList.remove("success", "hidden");
       statusElement.classList.add("error");
       throw new Error("Failed to add author");
     }
 
     // Clear form and show success message
-    event.target.reset();
-    statusElement.textContent =
-      "The author was successfully added to the system.";
-    statusElement.classList.remove("error");
+    form.reset();
+    statusElement.textContent = "The author was successfully added to the system.";
+    statusElement.classList.remove("error", "hidden");
     statusElement.classList.add("success");
 
+    // Create a complete author object with all required fields
+    const newAuthor = {
+      author_id: data.author_id,
+      author_name: authorName,
+      first_name: firstName,
+      last_name: lastName
+    };
+
     // Update the author cache with the new author
-    const firstName = formData.get("first_name");
-    const lastName = formData.get("last_name");
-    const fullName = `${firstName} ${lastName}`;
-    authorCache.addAuthor(fullName, data.author_id);
+    authorCache.addAuthor(authorName, data.author_id);
+
+    // Update the authors array and repopulate the datalist
+    authors.push(newAuthor);
+    populateDatalist('author_dropdown', authors, 'author_name');
+    
+    // Force the search input to recognize the new data
+    const authorSearchInput = document.querySelector("#author_search");
+    const inputEvent = new Event('input', { bubbles: true });
+    authorSearchInput.dispatchEvent(inputEvent);
+    
+    console.log("Author added successfully:", newAuthor);
   } catch (error) {
     console.error("Error adding author:", error);
     statusElement.textContent = "Failed to add author. Try again.";
-    statusElement.classList.remove("success");
+    statusElement.classList.remove("success", "hidden");
     statusElement.classList.add("error");
   }
 }
 
+// Update the addPublisher function to ensure the datalist is properly refreshed
 async function addPublisher(event) {
   event.preventDefault();
   const form = event.target;
@@ -425,8 +463,26 @@ async function addPublisher(event) {
 
   if (hasErrors) return;
 
+  // Get the publisher name directly from the input field - using the correct ID from your HTML
+  const publisherNameInput = form.querySelector("#add_publisher_name");
+  
+  if (!publisherNameInput) {
+    console.error("Publisher name input field not found!");
+    statusElement.textContent = "Form error: Publisher name field not found";
+    statusElement.classList.remove("success", "hidden");
+    statusElement.classList.add("error");
+    return;
+  }
+  
+  const publisherName = publisherNameInput.value.trim();
+  
+  // Create the FormData for the API request
   const formData = new FormData(form);
+  
   try {
+    // Log the form data for debugging
+    console.log("Submitting publisher with name:", publisherName);
+    
     const response = await fetch(`${API_BASE_URL}/admin/publishers`, {
       method: "POST",
       body: formData,
@@ -439,11 +495,31 @@ async function addPublisher(event) {
       throw new Error("Failed to add publisher");
     }
 
+    const data = await response.json();
+    
+    // Create complete publisher object using the name we got directly
+    const newPublisher = {
+      publisher_id: data.publisher_id,
+      publisher_name: publisherName // This is what will be displayed in the dropdown
+    };
+
     form.reset();
     statusElement.textContent =
       "The publisher was successfully added to the system.";
     statusElement.classList.remove("error", "hidden");
     statusElement.classList.add("success");
+
+    // Update the publishers array and repopulate the datalist
+    console.log("Added publisher:", newPublisher);
+    publishers.push(newPublisher);
+    populateDatalist('publisher_dropdown', publishers, 'publisher_name');
+    
+    // Force the search input to recognize the new data
+    const publisherSearchInput = document.querySelector("#publisher_search");
+    const inputEvent = new Event('input', { bubbles: true });
+    publisherSearchInput.dispatchEvent(inputEvent);
+    
+    console.log("Updated publisher array:", publishers);
   } catch (error) {
     console.error("Error adding publisher:", error);
     statusElement.textContent = "Failed to add publisher. Try again.";
